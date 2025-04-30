@@ -1,0 +1,12 @@
+["FP_Ger_Leopard","rhsusf_m1a2sep1d_usarmy","FP_UAF_Abrams","rhsusf_m1a1aimwd_usarmy","rhsusf_m1a1aim_tuski_wd","rhsusf_m1a2sep1tuskiwd_usarmy","rhsusf_m1a1fep_wd","rhsusf_m1a1hc_wd","rhsusf_stryker_m1126_mk19_wd","rhsusf_m1a2sep1tuskiiwd_usarmy"],
+["RHS_M2A2","FP_UAF_Bradley_Busk","FP_UAF_M113_HMG","RHS_M2A2_BUSKI_WD","RHS_M2A3_wd","RHS_M2A3_BUSKIII_wd","rhsusf_m1165a1_gmv_m134d_m240_socom_d","B_AFV_Wheeled_01_up_cannon_F","B_T_APC_Wheeled_01_cannon_F","rhsusf_m1165a1_gmv_mk19_m240_socom_d","rhsusf_m113_usarmy_MK19_90","FP_UAF_Stryker_MineClearer"],
+["FP_RHSUSAF_DEVGRU_Polaris_HMG","rhsusf_M1117_W","rhsusf_m1240a1_m2_uik_usarmy_wd","FP_UAF_Stryker","FP_UAF_Stryker_Recon","FP_RHSUSAF_DEVGRU_MATV_Heavy_Mk19","rhsusf_M1239_MK19_Deploy_socom_d","rhsusf_m1240a1_m2crows_usmc_wd"],
+["FP_UAF_Bradley","FP_UAF_Bradley_AA","rhsusf_rg33_m2_usmc_wd","rhsusf_CGRCAT1A2_M2_usmc_wd","FP_Ger_Fennek_HMG","FP_Ger_Wiesel_AA"],
+["FP_UAF_Humvee_Armored_M2","rhsusf_m1245_m2crows_socom_deploy","FP_Ger_Wiesel_ATGM","rhsusf_M1220_MK19_usarmy_d","FP_Ger_Boxer","FP_UAF_Humvee_M2","rhsusf_M1237_MK19_usarmy_d","rhsusf_M1220_MK19_usarmy_wd","FP_UAF_Humvee_Tow","rhsusf_M1230_MK19_usarmy_wd","rhsusf_M1237_M2_usarmy_wd","rhsusf_M1237_MK19_usarmy_wd","rhsusf_rg33_m2_usmc_d","rhsusf_rg33_m2_usmc_wd"],
+["FP_UAF_Humvee_Armored_PKM","FP_RHSUSAF_RANGER_2000s_Humvee_Mk19","FP_RHSUSAF_RANGER_2000s_Humvee_M2","FP_UAF_Humvee_Armored_PKM","rhsusf_m1025_w_s_Mk19","rhsusf_M1078A1R_SOV_M2_D_fmtv_socom","FP_Ger_Wiesel_ATGM","FP_Ger_Fennek_GMG"],
+["B_APC_Tracked_01_AA_F","B_AAA_System_01_F","B_Mortar_01_F","FP_UAF_Turret_AGS30"],
+["RHS_Stinger_AA_pod_D","FP_UAF_Turret_M2_High","FP_UAF_Turret_TOW","B_Mortar_01_F","FP_UAF_Turret_ZU23"],
+["RHS_M252_D","RHS_M119_D","RHS_M252_USMC_WD"],
+["rhsusf_M978A4_BKIT_usarmy_d","rhsusf_M978A4_BKIT_usarmy_wd"],
+["rhsusf_M977A4_REPAIR_usarmy_d","rhsusf_M977A4_REPAIR_usarmy_wd"],
+["rhsusf_M977A4_AMMO_usarmy_d","rhsusf_M977A4_AMMO_usarmy_wd"]

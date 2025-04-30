@@ -1,0 +1,7 @@
+#begin
+while {true} do { 
+_sound = selectRandom ["rhs_rus_land_rc_01","rhs_rus_land_rc_02","A4","rhs_rus_land_rc_03","rhs_rus_land_rc_04","rhs_rus_land_rc_05","rhs_rus_land_rc_06","A9","rhs_rus_land_rc_07","rhs_rus_land_rc_08","rhs_rus_land_rc_09","rhs_rus_land_rc_10","A1","rhs_rus_land_rc_11","rhs_rus_land_rc_12","A6","rhs_rus_land_rc_13","rhs_rus_land_rc_14","A3","rhs_rus_land_rc_36","rhs_rus_land_rc_16","A10","rhs_rus_land_rc_17","rhs_rus_land_rc_18","rhs_rus_land_rc_19","A12","rhs_rus_land_rc_20","rhs_rus_land_rc_21","rhs_rus_land_rc_22","A2","rhs_rus_land_rc_23","rhs_rus_land_rc_24","rhs_rus_land_rc_25","rhs_rus_land_rc_26","A7","rhs_rus_land_rc_27","rhs_rus_land_rc_28","rhs_rus_land_rc_29","A5","rhs_rus_land_rc_30","A8","rhs_rus_land_rc_31","rhs_rus_land_rc_32","rhs_rus_land_rc_33","A11","rhs_rus_land_rc_34","rhs_rus_land_rc_35","rhs_rus_land_rc_36"]; 
+playSound _sound; 
+~1200
+};
+goto "begin";
