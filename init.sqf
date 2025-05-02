@@ -24,14 +24,32 @@ if (isMultiplayer && {hasInterface}) then {
 enableSaving [false,false];
 enableTeamSwitch false;
 
-player exec "scripts\radioru.sqs";
-
-// Поиск всех InfoStand на карте
-{
-    if (typeOf _x == "Land_InfoStand_V2_F") then {
-        [_x] execVM "scripts\fn_activateTechShop.sqf";
+// Серверная часть
+if (isServer) then {
+    // Загрузка конфига
+    execVM "scripts\vehicleShop\vehicleShop_config.sqf";
+    
+    // Инициализация после загрузки конфига
+    [] spawn {
+        waitUntil {!isNil "vehicleShop_configLoaded"};
+        execVM "scripts\vehicleShop\vehicleShop_init.sqf";
     };
-} forEach allMissionObjects "All";
+};
+
+// Клиентская часть
+if (hasInterface) then {
+    // Предзагрузка функций
+    vehicleShop_open = compile preprocessFileLineNumbers "scripts\vehicleShop\vehicleShop_open.sqf";
+    
+    player addEventHandler ["Respawn", {
+        [] spawn {
+            waitUntil {!isNil "d_player_hash"};
+            systemChat "Данные игрока загружены";
+        };
+    }];
+};
+
+player exec "scripts\radioru.sqs";
 
 private _year = -1;
 #ifdef __IFA3__
@@ -93,3 +111,4 @@ _year spawn {
 };
 
 diag_log [diag_frameno, diag_ticktime, time, "Dom init.sqf processed"];
+
