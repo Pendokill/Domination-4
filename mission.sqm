@@ -8,7 +8,7 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=440;
+		nextID=443;
 	};
 	class MarkerIDProvider
 	{
@@ -16,7 +16,7 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={1874.3502,13.388125,5761.0391};
+		pos[]={1878.6938,10.00725,5760.1826};
 		dir[]={0.88787436,-0.43298107,-0.1555846};
 		up[]={0.42648271,0.90140301,-0.074733712};
 		aside[]={-0.17260271,-7.4505806e-09,-0.98499155};
@@ -563,7 +563,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=237;
+		items=236;
 		class Item0
 		{
 			dataType="Marker";
@@ -10844,28 +10844,9 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="[this] execVM ""scripts\fn_activateTechShop.sqf"";";
 				name="stand1";
 			};
 			id=437;
-			type="Land_InfoStand_V2_F";
-		};
-		class Item236
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={1887.6309,6.2762661,5759.5444};
-				angles[]={6.2806959,4.7983117,0.0024897563};
-			};
-			side="Empty";
-			flags=4;
-			class Attributes
-			{
-				init="if (hasInterface) then {this addAction [localize ""STR_DOM_MISSIONSTRING_1866"", {disableSerialization; createDialog ""CTI_RscPurchaseMenu"";}]}";
-				name="d_teh";
-			};
-			id=439;
 			type="Land_InfoStand_V2_F";
 		};
 	};

@@ -24,27 +24,23 @@ if (isMultiplayer && {hasInterface}) then {
 enableSaving [false,false];
 enableTeamSwitch false;
 
-// Серверная часть
+// Серверная инициализация
 if (isServer) then {
-    // Загрузка конфига
-    execVM "scripts\vehicleShop\vehicleShop_config.sqf";
-    
-    // Инициализация после загрузки конфига
     [] spawn {
+        waitUntil {time > 1};
+        execVM "scripts\vehicleShop\vehicleShop_config.sqf";
         waitUntil {!isNil "vehicleShop_configLoaded"};
         execVM "scripts\vehicleShop\vehicleShop_init.sqf";
     };
 };
 
-// Клиентская часть
+// Клиентская инициализация
 if (hasInterface) then {
-    // Предзагрузка функций
-    vehicleShop_open = compile preprocessFileLineNumbers "scripts\vehicleShop\vehicleShop_open.sqf";
-    
+    waitUntil {!isNull player};
     player addEventHandler ["Respawn", {
         [] spawn {
-            waitUntil {!isNil "d_player_hash"};
-            systemChat "Данные игрока загружены";
+            waitUntil {!isNil "vehicleShop_configLoaded"};
+            systemChat "Магазин техники инициализирован";
         };
     }];
 };

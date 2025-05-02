@@ -1,33 +1,37 @@
-if (!isServer) exitWith {};
-
-params ["_player", "_selectedIndex"];
-private _vehicleData = vehicleShop_vehicles select _selectedIndex;
-_vehicleData params ["_class","_cost","_name"];
-
-// Проверка очков
-private _points = [_player] call vehicleShop_getPoints;
-if (_points < _cost) exitWith {
-    [format ["Ошибка: у игрока %1 недостаточно очков", name _player]] remoteExec ["systemChat", _player];
+if (!isServer) exitWith {
+    _this remoteExec ["vehicleShop_purchase", 2];
 };
 
-// Поиск места спавна
-private _stand = [vehicleShop_stands, _player] call BIS_fnc_nearestPosition;
-private _spawnPos = [];
+params ["_player", "_className", "_cost"];
+
+// Проверяем достаточно ли очков
+private _currentPoints = [_player] call vehicleShop_getPoints;
+if (_currentPoints < _cost) exitWith {
+    [format ["Недостаточно очков! Нужно: %1, есть: %2", _cost, _currentPoints]] remoteExec ["hint", _player];
+};
+
+// Находим стойку и позицию спавна
+private _nearestStand = [vehicleShop_stands, _player] call BIS_fnc_nearestPosition;
+private _spawnPositions = [_nearestStand] call vehicleShop_getSpawnPos;
+
+// Ищем свободное место
+private _spawnData = nil;
 {
-    _x params ["_pos","_dir"];
-    if (count nearestObjects [_pos, ["AllVehicles"], 5] == 0) exitWith {
-        _spawnPos = [_pos, _dir];
+    _x params ["_pos", "_dir"];
+    private _nearVehicles = nearestObjects [_pos, ["AllVehicles"], 5];
+    if (count _nearVehicles == 0) exitWith {
+        _spawnData = _x;
     };
-} forEach ([_stand] call vehicleShop_getSpawnPos);
+} forEach _spawnPositions;
 
-if (_spawnPos isEqualTo []) exitWith {
-    ["Все места спавна заняты!"] remoteExec ["hint", _player];
+if (isNil "_spawnData") exitWith {
+    ["Все позиции спавна заняты!"] remoteExec ["hint", _player];
 };
 
-// Создание техники
-_spawnPos params ["_pos","_dir"];
-private _vehicle = createVehicle [_class, _pos, [], 0, "CAN_COLLIDE"];
-_vehicle setDir (_dir + getDir _stand);
+// Создаем технику
+_spawnData params ["_pos", "_dir"];
+private _vehicle = createVehicle [_className, _pos, [], 0, "CAN_COLLIDE"];
+_vehicle setDir (_dir + getDir _nearestStand);
 _vehicle setPosATL _pos;
 
 // Помещаем игрока в технику
@@ -36,6 +40,8 @@ _vehicle setPosATL _pos;
 // Списание очков
 [_player, _cost] call vehicleShop_deductPoints;
 
-// Уведомление
-[format ["%1 куплен за %2 очков", _name, _cost]] remoteExec ["hint", _player];
-diag_log format ["[VehicleShop] %1 купил %2", name _player, _name];
+// Обновление интерфейса
+["Техника успешно куплена!"] remoteExec ["hint", _player];
+[_player] remoteExec ["vehicleShop_updatePoints", _player];
+
+diag_log format ["[VehicleShop] Игрок %1 купил %2 за %3 очков", name _player, _className, _cost];
