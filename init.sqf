@@ -24,20 +24,22 @@ if (isMultiplayer && {hasInterface}) then {
 enableSaving [false,false];
 enableTeamSwitch false;
 
-// Серверная инициализация
+// Серверная часть инициализации
 if (isServer) then {
     [] spawn {
-        waitUntil {time > 1};
-        execVM "scripts\vehicleShop\vehicleShop_config.sqf";
+        waitUntil {time > 1}; // Ждем немного после старта
+        execVM "scripts\vehicleShop\vehicleShop_config.sqf"; // Загрузка конфигурации
         waitUntil {!isNil "vehicleShop_configLoaded"};
-        execVM "scripts\vehicleShop\vehicleShop_init.sqf";
+        execVM "scripts\vehicleShop\vehicleShop_init.sqf"; // Основная инициализация
     };
 };
 
-// Клиентская инициализация
+// Клиентская часть
 if (hasInterface) then {
-    waitUntil {!isNull player && !isNil "vehicleShop_configLoaded"};
-    systemChat "Магазин техники инициализирован";
+    [] spawn {
+        waitUntil {!isNull player && !isNil "vehicleShop_configLoaded"};
+        systemChat "Магазин техники инициализирован";
+    };
 };
 
 player exec "scripts\radioru.sqs";

@@ -592,7 +592,7 @@ class Params {
 	class d_targetselect_time {
 		title = "$STR_DOM_MISSIONSTRING_2092";
 		values[] = {30,45,60,120,240,300};
-		default = 300;
+		default = 30;
 		texts[] = {"30","45","60","120","240",300};
 	};
 
@@ -2102,7 +2102,7 @@ class CfgFunctions {
     class VehicleShop {
         class Functions {
             file = "scripts\vehicleShop";
-            class init { postInit = 1; };
+            class init { postInit = 1; }; // Автозапуск после инициализации
         };
     };
 };
