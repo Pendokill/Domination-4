@@ -36,13 +36,8 @@ if (isServer) then {
 
 // Клиентская инициализация
 if (hasInterface) then {
-    waitUntil {!isNull player};
-    player addEventHandler ["Respawn", {
-        [] spawn {
-            waitUntil {!isNil "vehicleShop_configLoaded"};
-            systemChat "Магазин техники инициализирован";
-        };
-    }];
+    waitUntil {!isNull player && !isNil "vehicleShop_configLoaded"};
+    systemChat "Магазин техники инициализирован";
 };
 
 player exec "scripts\radioru.sqs";
@@ -104,6 +99,30 @@ _year spawn {
 		};
 		setDate [_year, _st # 1, _st # 2, _st # 3, _st # 4];
 	};
+};
+
+// Клиентская проверка обновлений магазина
+if (hasInterface) then {
+    [] spawn {
+        waitUntil {!isNull player && !isNil "vehicleShop_vehicles"};
+        
+        while {true} do {
+            if (!isNull (findDisplay 5000)) then {
+                private _currentPoints = score player;
+                private _dialog = findDisplay 5000;
+                private _pointsText = _dialog displayCtrl 5003;
+                _pointsText ctrlSetText format ["ОЧКИ: %1", _currentPoints];
+                
+                // Обновление цветов в списке
+                private _vehicleList = _dialog displayCtrl 5001;
+                for "_i" from 0 to (lbSize _vehicleList - 1) do {
+                    _cost = _vehicleList lbValue _i;
+                    _vehicleList lbSetColor [_i, if (_currentPoints >= _cost) then {[1,1,1,1]} else {[1,0.3,0.3,0.7]}];
+                };
+            };
+            sleep 2;
+        };
+    };
 };
 
 diag_log [diag_frameno, diag_ticktime, time, "Dom init.sqf processed"];

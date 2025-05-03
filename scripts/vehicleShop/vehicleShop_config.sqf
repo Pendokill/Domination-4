@@ -1,32 +1,92 @@
 // Конфигурация магазина техники
-vehicleShop_vehicles = [
-    ["B_MRAP_01_F", 10, "HMMWV (10 очков)"],
-    ["B_Truck_01_transport_F", 75, "Грузовик (75 очков)"],
-    ["B_APC_Wheeled_01_cannon_F", 150, "AMV (150 очков)"],
-    ["B_Heli_Light_01_F", 100, "MH-9 Hummingbird (100 очков)"],
-    ["B_Heli_Transport_01_F", 200, "UH-80 Ghost Hawk (200 очков)"],
-    ["B_MBT_01_cannon_F", 300, "M2A1 Slammer (300 очков)"]
-];
-
-// Позиции спавна относительно стоек
-vehicleShop_spawnOffsets = [
-    [3, 0, 0, 0],
-    [0, 3, 0, 90],
-    [-3, 0, 0, 180],
-    [0, -3, 0, 270]
-];
-
-// Автоматический поиск стоек InfoStand
-vehicleShop_stands = (allMissionObjects "Land_InfoStand_V2_F") select {
-    // Можно добавить дополнительные проверки, если нужно
-    true
-};
-
-if (count vehicleShop_stands == 0) then {
-    diag_log "[VehicleShop] Внимание: не найдено стоек Land_InfoStand_V2_F!";
-} else {
-    diag_log format ["[VehicleShop] Найдено стоек: %1", count vehicleShop_stands];
-};
-
-// Глобальная переменная для проверки загрузки
+vehicleShop_vehicles = [];
+vehicleShop_spawnMarker = "vehicle_spawn";
 vehicleShop_configLoaded = true;
+
+// Функция кастомных цен
+vehicleShop_customPrices = {
+    params ["_vehicles"];
+    
+    {
+        _className = _x select 0;
+        switch (true) do {
+            // RHS
+            case (_className == "rhs_t90a_tv"): { _x set [1, 700] };
+            case (_className == "rhs_bmp2_msv"): { _x set [1, 150] };
+            case (_className find "mi8" != -1):  { _x set [1, (_x select 1) * 1.2] };
+            
+            // SCAT
+            case (_className == "scat_btr80_woodland"): { _x set [1, 220] };
+            
+            // min RF
+            case (_className == "min_rf_sa_22"): { _x set [1, 1200] };
+			case (_className == "min_rf_t_14_desert"): { _x set [1, 900] };
+			case (_className == "min_rf_t_15_desert"): { _x set [1, 900] };
+        };
+    } forEach _vehicles;
+    
+    _vehicles
+};
+
+// Основная функция фильтрации
+vehicleShop_filterVehicles = {
+    params ["_allVehicles"];
+    private _filtered = [];
+    
+    private _allowedMods = ["rhs_", "min_rf_", "scat_"];
+    private _allowedCategories = ["Armored", "Car", "Air", "Tank"]; //"Support", 
+    private _blacklist = ["rhs_2s3_tv", "rhs_bm21_MSV_01"];
+    
+    {
+        _className = _x;
+        _config = configFile >> "CfgVehicles" >> _className;
+        
+        _modAllowed = false;
+        { if (_className find _x == 0) exitWith { _modAllowed = true }; } forEach _allowedMods;
+        
+        if (
+            _modAllowed &&
+            getNumber(_config >> "scope") == 2 &&
+            {getText(_config >> "vehicleClass") in _allowedCategories} &&
+            {!(_className in _blacklist)} &&
+            {getText(_config >> "faction") in ["rhs_faction_msv", "rhs_faction_vdv"]}
+        ) then {
+            _displayName = getText(_config >> "displayName");
+            
+            // Исправленный расчет стоимости:
+            _cost = round (
+                (getNumber(_config >> "armor") * 0.8) +
+                (getNumber(_config >> "enginePower") * 0.2) +
+                (getNumber(_config >> "maximumLoad") * 0.05)
+            );
+            
+            _cost = (_cost max 10) min 2000;
+            
+            _filtered pushBack [_className, _cost, _displayName];
+        };
+    } forEach _allVehicles;
+    
+    _filtered sort true;
+    _filtered
+};
+
+// Серверная инициализация
+if (isServer) then {
+    _allVehicleClasses = "(configName _x) isKindOf 'AllVehicles'" configClasses (configFile >> "CfgVehicles") apply {configName _x};
+    
+    vehicleShop_vehicles = [_allVehicleClasses] call vehicleShop_filterVehicles;
+    vehicleShop_vehicles = [vehicleShop_vehicles] call vehicleShop_customPrices;
+    
+    publicVariable "vehicleShop_vehicles";
+    diag_log format ["[VehicleShop] Загружено %1 единиц техники", count vehicleShop_vehicles];
+};
+
+// Убедимся, что клиенты получат данные
+if (isServer) then {
+    [] spawn {
+        sleep 1;
+        publicVariable "vehicleShop_vehicles";
+        publicVariable "vehicleShop_stands";
+        diag_log "[VehicleShop] Данные синхронизированы с клиентами";
+    };
+};

@@ -1,35 +1,41 @@
-/*
-    vehicleShop_init.sqf
-    Инициализация магазина техники для миссии Domination
-    Версия 2.0 (полностью переработанная)
-*/
-
-// Ждем загрузки основных систем миссии
-waitUntil {!isNil "d_player_hash" && !isNil "vehicleShop_configLoaded"};
+waitUntil {!isNil "vehicleShop_configLoaded" && !isNil "vehicleShop_vehicles"};
 
 diag_log "[VehicleShop] Начало инициализации магазина техники";
 
-// ====================== ОСНОВНЫЕ ФУНКЦИИ ======================
-
-/* Функция получения текущих очков игрока */
-vehicleShop_getPoints = {
-    params ["_player"];
-    private _uid = getPlayerUID _player;
-    private _scoresKey = _uid + "_scores";
+// Определяем функцию обновления UI
+vehicleShop_updateUI = {
+    if (!hasInterface) exitWith {};
     
-    if (_scoresKey in d_player_hash) then {
-        private _playerData = d_player_hash get _scoresKey;
-        if (count _playerData >= 6) then {
-            _playerData select 5 // Возвращаем 6-й элемент массива (очки)
-        } else {
-            0
-        };
-    } else {
-        0
+    private _dialog = findDisplay 5000;
+    if (isNull _dialog) exitWith {
+        diag_log "[VehicleShop] Ошибка: диалог не найден для обновления UI";
     };
+    
+    private _vehicleList = _dialog displayCtrl 5001;
+    lbClear _vehicleList;
+    
+    {
+        _x params ["_className", "_cost", "_displayName"];
+        private _picture = getText(configFile >> "CfgVehicles" >> _className >> "picture");
+        private _index = _vehicleList lbAdd format ["▸ %1", _displayName];
+        _vehicleList lbSetData [_index, _className];
+        _vehicleList lbSetValue [_index, _cost];
+        _vehicleList lbSetPicture [_index, _picture];
+        _vehicleList lbSetColor [_index, if (score player >= _cost) then {[1,1,1,1]} else {[1,0.3,0.3,0.7]}];
+    } forEach vehicleShop_vehicles;
+    
+    private _pointsText = _dialog displayCtrl 5003;
+    _pointsText ctrlSetText format ["ОЧКИ: %1", score player];
+    
+    if (lbSize _vehicleList > 0) then {
+        _vehicleList lbSetCurSel 0;
+        [_vehicleList, 0] call vehicleShop_updateDetails;
+    };
+    
+    diag_log "[VehicleShop] UI успешно обновлен";
 };
 
-/* Функция обновления деталей техники */
+// Функция обновления деталей
 vehicleShop_updateDetails = {
     params ["_control", "_selectedIndex"];
     
@@ -44,163 +50,83 @@ vehicleShop_updateDetails = {
     private _displayName = _vehicleData select 2;
     
     private _config = configFile >> "CfgVehicles" >> _className;
-    private _description = getText(_config >> "Library" >> "libTextDesc");
     private _maxSpeed = getNumber(_config >> "maxSpeed");
     private _armor = getNumber(_config >> "armor");
+    private _crew = getText(_config >> "crew");
+    private _picture = getText(_config >> "picture");
+    private _desc = getText(_config >> "Library" >> "libTextDesc");
     
     _detailsCtrl ctrlSetStructuredText parseText format [
-        "<t font='PuristaMedium' size='0.8'>%1<br/>Цена: %2 очков<br/><br/>Описание: %3<br/>Макс. скорость: %4 км/ч<br/>Броня: %5</t>",
-        _displayName, _cost, _description, _maxSpeed, _armor
+        "<t font='RobotoCondensed' size='1.8'><img image='%5' size='6' align='center'/><br/><br/>" +
+        "<t font='RobotoCondensedBold' size='2'>%1</t><br/>" +
+        "<t color='#FFD700'>Цена: %2 очей</t><br/><br/>" +
+        "▸ Скорость: %3 км/ч<br/>" +
+        "▸ Броня: %4<br/>" +
+        "▸ Экипаж: %6<br/><br/>" +
+        "%7</t>",
+        _displayName, _cost, _maxSpeed, _armor, _picture, _crew, _desc
     ];
 };
 
-/* Функция проверки достаточности очков */
-vehicleShop_checkPoints = {
-    params ["_player", "_cost"];
-    private _points = [_player] call vehicleShop_getPoints;
-    _points >= _cost
-};
-
-/* Функция списания очков (только на сервере) */
-vehicleShop_deductPoints = {
-    params ["_player", "_cost"];
+// Проверяем наличие стоек
+if (isNil "vehicleShop_stands") then {
+    vehicleShop_stands = allMissionObjects "Land_InfoStand_V2_F";
+    diag_log format ["[VehicleShop] Найдено стоек: %1", count vehicleShop_stands];
     
-    if (!isServer) exitWith {
-        _this remoteExec ["vehicleShop_deductPoints", 2];
-    };
-    
-    private _uid = getPlayerUID _player;
-    private _scoresKey = _uid + "_scores";
-    
-    // Получаем текущие данные
-    private _playerData = if (_scoresKey in d_player_hash) then {
-        d_player_hash get _scoresKey
-    } else {
-        [0,0,0,0,0,0] // Значение по умолчанию
-    };
-    
-    // Обновляем очки
-    if (count _playerData >= 6) then {
-        _playerData set [5, (_playerData select 5) - _cost];
-        d_player_hash set [_scoresKey, _playerData];
-        
-        // Синхронизация
-        publicVariable "d_player_hash";
-        diag_log format ["[VehicleShop] Списано %1 очков у %2", _cost, name _player];
+    if (count vehicleShop_stands == 0) then {
+        private _pos = getPosATL player;
+        _pos = [_pos select 0, _pos select 1, 0];
+        vehicleShop_stands = [createVehicle ["Land_InfoStand_V2_F", _pos, [], 0, "CAN_COLLIDE"]];
+        diag_log "[VehicleShop] Создана резервная стойка";
+        publicVariable "vehicleShop_stands";
     };
 };
 
-/* Функция получения позиций спавна */
-vehicleShop_getSpawnPos = {
-    params ["_stand"];
-    
-    private _spawnPositions = [];
-    {
-        private _pos = _stand modelToWorld [_x select 0, _x select 1, _x select 2];
-        _spawnPositions pushBack [_pos, _x select 3];
-    } forEach vehicleShop_spawnOffsets;
-    
-    _spawnPositions
-};
-
-/* Функция обновления интерфейса */
-vehicleShop_updateUI = {
+// Функция открытия магазина
+vehicleShop_openMenu = {
     if (!hasInterface) exitWith {};
     
-    private _dialog = findDisplay 5000;
-    if (isNull _dialog) exitWith {};
+    diag_log "[VehicleShop] Попытка открытия меню";
     
-    // Обновляем список техники
-    private _vehicleList = _dialog displayCtrl 5001;
-    lbClear _vehicleList;
+    waitUntil {!isNull (findDisplay 46)};
+    createDialog "VehicleShopDialog";
     
-    {
-        _x params ["_className", "_cost", "_displayName"];
-        private _index = _vehicleList lbAdd _displayName;
-        _vehicleList lbSetData [_index, _className];
-        _vehicleList lbSetValue [_index, _cost];
-    } forEach vehicleShop_vehicles;
-    
-    // Обновляем очки
-    private _pointsText = _dialog displayCtrl 5003;
-    private _currentPoints = [player] call vehicleShop_getPoints;
-    _pointsText ctrlSetText format ["Очков: %1", _currentPoints];
-    
-    // Выбираем первый элемент
-    if (lbSize _vehicleList > 0) then {
-        _vehicleList lbSetCurSel 0;
-        [_vehicleList, 0] call vehicleShop_updateDetails;
+    if (isNull (findDisplay 5000)) then {
+        diag_log "[VehicleShop] Ошибка: не удалось создать диалог";
+        systemChat "Ошибка открытия меню магазина";
+    } else {
+        diag_log "[VehicleShop] Меню успешно открыто";
+        [] call vehicleShop_updateUI;
     };
 };
 
-// ====================== ИНИЦИАЛИЗАЦИЯ МАГАЗИНА ======================
-
-// Проверяем наличие стоек
-if (isNil "vehicleShop_stands" || {count vehicleShop_stands == 0}) exitWith {
-    diag_log "[VehicleShop] Ошибка: не найдено стоек для магазина";
-};
-
-diag_log format ["[VehicleShop] Найдено стоек: %1", count vehicleShop_stands];
-
-// Добавляем действия к стойкам
+// Добавляем действие к стойкам
 {
     private _stand = _x;
+    diag_log format ["[VehicleShop] Добавление действия к стойке %1", _stand];
+    
+    // Удаляем старые действия перед добавлением новых
+    _stand call {
+        removeAllActions _this;
+    };
+    
     _stand addAction [
-        "<t color='#00FFFF'>[Магазин техники]</t>", 
+        "<t color='#FF0000'>[Магазин техники]</t>", 
         {
-            if (hasInterface) then {
-                [] spawn {
-                    // Ждем готовности данных
-                    waitUntil {
-                        !isNull (findDisplay 46) && 
-                        !isNil "vehicleShop_vehicles" && 
-                        !isNil "d_player_hash"
-                    };
-                    
-                    // Создаем диалог
-                    createDialog "VehicleShopDialog";
-                    
-                    // Ждем создания диалога
-                    waitUntil {!isNull (findDisplay 5000) || time > 5};
-                    
-                    if (isNull (findDisplay 5000)) exitWith {
-                        systemChat "Ошибка открытия меню";
-                        diag_log "[VehicleShop] Не удалось создать диалог";
-                    };
-                    
-                    // Обновляем интерфейс
-                    [] call vehicleShop_updateUI;
-                    
-                    // Цикл обновления
-                    [] spawn {
-                        while {!isNull (findDisplay 5000)} do {
-                            [] call vehicleShop_updateUI;
-                            sleep 0.5;
-                        };
-                    };
-                };
-            };
+            [] spawn vehicleShop_openMenu;
         },
-        nil,
-        1.5,
-        true,
-        true,
-        "",
-        "true",
+        nil, 1.5, true, true, "", 
+        "playerSide == east && (player distance _target) < 3",
         5
     ];
     
     _stand enableSimulation true;
     _stand allowDamage false;
-    diag_log format ["[VehicleShop] Действие добавлено к стойке %1", _forEachIndex];
 } forEach vehicleShop_stands;
 
-// Синхронизация функций с клиентами
-publicVariable "vehicleShop_getPoints";
-publicVariable "vehicleShop_updateDetails";
-publicVariable "vehicleShop_checkPoints";
-publicVariable "vehicleShop_deductPoints";
-publicVariable "vehicleShop_getSpawnPos";
+// Публикация функций
 publicVariable "vehicleShop_updateUI";
+publicVariable "vehicleShop_updateDetails";
+publicVariable "vehicleShop_openMenu";
 
-diag_log "[VehicleShop] Инициализация магазина завершена";
+diag_log format ["[VehicleShop] Инициализация завершена. Стоек: %1", count vehicleShop_stands];

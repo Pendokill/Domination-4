@@ -2095,6 +2095,7 @@ class Params {
 #include "dlg\AirTaxiDialog.hpp"
 #include "Rsc\Resources.hpp"
 #include "Rsc\Dialogs.hpp"
+#include "Rsc\Styles.hpp"
 #include "scripts\vehicleShop\vehicleShop_dialog.hpp"
 
 class CfgFunctions {
@@ -3077,6 +3078,17 @@ class Extended_Init_Eventhandlers {
 	class Air {
 		d_air_init = "_this call d_fnc_vecinit";
 	};
+	
+	class CfgFonts {
+    class RobotoCondensed {
+        font = "\A3\Ui_fonts\F_RobotoCondensed\RobotoCondensed";
+        size = 1;
+    };
+    class RobotoCondensedBold {
+        font = "\A3\Ui_fonts\F_RobotoCondensed\RobotoCondensedBold";
+        size = 1;
+    };
+};
 };
 
 //__EXEC(diag_log [diag_frameno, diag_ticktime, time, "Dom description.ext processed"]);
