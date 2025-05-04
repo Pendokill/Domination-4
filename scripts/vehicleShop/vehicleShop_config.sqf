@@ -1,6 +1,6 @@
 /*
     vehicleShop_config.sqf
-    Конфигурация магазина техники
+    Конфигурация с индексами званий 0-7
     Автоматическая загрузка техники с сервера
 */
 
@@ -9,38 +9,77 @@ vehicleShop_vehicles = []; // Массив техники (будет запол
 vehicleShop_spawnMarker = "vehicle_spawn"; // Маркер для спавна техники
 vehicleShop_configLoaded = true; // Флаг загрузки конфига
 
-// Функция кастомных цен (должна быть объявлена ДО вызова)
+// Функция определения ранга для техники (возвращает индекс 0-7)
+vehicleShop_getVehicleRank = {
+    params ["_className", "_cost"];
+    
+    private _vehicleClass = getText(configFile >> "CfgVehicles" >> _className >> "vehicleClass");
+    private _armor = getNumber(configFile >> "CfgVehicles" >> _className >> "armor");
+    
+        // Примеры переопределения звания:
+    switch (true) do {
+        // Легкая техника - Рядовой (0)
+        case (_vehicleClass in ["Car"]): {0};
+        // БТРы - Ефрейтор (1)
+        case (_vehicleClass in ["Armored"] && _armor < 500): {1};
+        // Тяжелая техника - Сержант (2)
+        case (_vehicleClass in ["Armored"] && _armor >= 500): {2};
+        // Танки - от Сержанта (2) до Лейтенанта (3)
+        case (_vehicleClass == "Tank" && _cost < 500): {2};
+        case (_vehicleClass == "Tank" && _cost >= 500): {3};
+        // ПВО - Капитан (4)
+        case (_className find "sa_" != -1): {4};
+        // Вертолеты - от Ефрейтора (1) до Лейтенанта (3)
+        case (_vehicleClass == "Air" && _className find "mi24" != -1): {3};
+        case (_vehicleClass == "Air" && _className find "mi8" != -1): {1};
+        // Самолеты - Капитан (4)
+        case (_vehicleClass == "Plane"): {4};
+        // По умолчанию - Рядовой (0)
+        default {0};
+    }
+};
+
+// Функция кастомных цен и рангов
 vehicleShop_customPrices = {
     params ["_vehicles"];
     
     {
         _x params ["_className", "_cost", "_displayName"];
         
-        // Примеры переопределения цен:
+        // Автоматически определяем ранг
+        private _requiredRankIndex = [_className, _cost] call vehicleShop_getVehicleRank;
+        
+        // Добавляем ранг в массив данных
+        if (count _x < 4) then {
+            _x pushBack _requiredRankIndex;
+        } else {
+            _x set [3, _requiredRankIndex];
+        };
+        
+        // Примеры ручного переопределения звания
         switch (true) do {
-            // RHS техника
-            case (_className == "rhs_t72ba_tv"): { _x set [1, 350] }; // Т-72БА
-            case (_className == "rhs_bmp2_msv"): { _x set [1, 180] }; // БМП-2
-			case (_className == "rhs_t90sm_tv"): { _x set [1, 700] }; // Т-90
-            case (_className == "rhs_t90am_tv"): { _x set [1, 700] }; // Т-90
-			case (_className == "min_rf_sa_22"): { _x set [1, 1200] }; // Панцирь-С1
-            case (_className == "min_rf_sa_22_desert"): { _x set [1, 1200] }; // Панцирь-С1
-			case (_className == "min_rf_sa_22_winter"): { _x set [1, 1200] }; // Панцирь-С1
-            case (_className == "min_rf_t_15"): { _x set [1, 950] }; // Т-15 Армата
-			case (_className == "min_rf_t_15_desert"): { _x set [1, 950] }; // Т-15 Армата
-            case (_className == "min_rf_t_15_winter"): { _x set [1, 950] }; // Т-15 Армата
-            case (_className find "mi8" != -1): { _x set [1, (_x select 1) * 1.5] }; // Вертолеты +50%
-            
-            // SCAT техника
-            case (_className == "scat_btr80_woodland"): { _x set [1, 120] };
-            
-            // CUP техника
-            case (_className == "CUP_O_BMP2_RU"): { _x set [1, 200] };
-            
-            // Общее правило для танков
-            case (getText(configFile >> "CfgVehicles" >> _className >> "vehicleClass") == "Tank"): {
-                _x set [1, (_x select 1) * 1.2] // +20% к стоимости танков
-            };
+            case (_className == "min_rf_sa_22"): { _x set [3, 6] }; // Полковник
+			case (_className == "min_rf_sa_22_desert"): { _x set [3, 6] }; // Полковник
+			case (_className == "min_rf_sa_22_winter"): { _x set [3, 6] }; // Полковник
+			case (_className == "min_rf_2b26"): { _x set [3, 6] }; // Полковник
+			case (_className == "min_rf_2b26_desert"): { _x set [3, 6] }; // Полковник
+			case (_className == "min_rf_2b26_winter"): { _x set [3, 6] }; // Полковник
+            case (_className == "min_rf_t_15"): { _x set [3, 5] }; // Майор
+			case (_className == "min_rf_t_15_desert"): { _x set [3, 5] }; // Майор
+			case (_className == "min_rf_t_15_winter"): { _x set [3, 5] }; // Майор
+			case (_className == "rhs_t15_tv"): { _x set [3, 3] }; // Лейтенант
+			case (_className == "min_rf_t_14"): { _x set [3, 4] }; // Капитан
+			case (_className == "min_rf_t_14_desert"): { _x set [3, 4] }; // Капитан
+			case (_className == "min_rf_t_14_winter"): { _x set [3, 4] }; // Капитан
+			case (_className == "min_rf_su_34"): { _x set [3, 4] }; // Капитан
+			case (_className == "min_rf_su_34_desert"): { _x set [3, 4] }; // Капитан
+			case (_className == "min_rf_ka_52"): { _x set [3, 4] }; // Капитан
+			case (_className == "min_rf_ka_52_grey"): { _x set [3, 4] }; // Капитан
+            case (_className == "rhs_t90am_tv"): { _x set [3, 3] }; // Лейтенант
+			case (_className == "rhs_t90sm_tv"): { _x set [3, 3] }; // Лейтенант
+			case (_className == "O_BMPT"): { _x set [3, 4] }; // Капитан
+			case (_className == "FP_Ger_Fighter_Jet"): { _x set [3, 4] }; // Капитан
+			case (_className == "O_Plane_CAS_02_dynamicLoadout_F"): { _x set [3, 4] }; // Капитан
         };
     } forEach _vehicles;
     
@@ -52,10 +91,9 @@ vehicleShop_filterVehicles = {
     params ["_allVehicleClasses"]; // Получаем все классы техники    
     private _filtered = []; // Отфильтрованный массив
     
-    // Настройки фильтрации:
-    private _allowedMods = ["rhsafrf_", "rhsusf_", "F_", "scat_", "min_rf_"]; // Разрешенные префиксы модов
-    private _allowedCategories = ["Armored","Car","Air","Support","Tank"]; // Разрешенные категории
-    private _blacklist = ["rhs_2s3_tv", "rhs_bm21_MSV_01"]; // Запрещенная техника
+    private _allowedMods = ["CWR_", "JAS_", "lago_"];  // Разрешенные префиксы модов , "A3_", "FP_", "scat_", "min_rf_"
+    private _allowedCategories = ["Car","Armored","Helicopter","Air","Tank","Plane"];  // Разрешенные категории ,"Support"
+    private _blacklist = ["rhs_2s3_tv", "rhs_bm21_MSV_01", "rhs_9k79_B", "rhs_9k79_K", "rhs_9k79"]; // Запрещенная техника
     
     // Фильтрация каждого класса техники
     {
@@ -90,14 +128,14 @@ vehicleShop_filterVehicles = {
             _filtered pushBack [
                 _className,
                 _cost,
-                getText(_config >> "displayName")
+                getText(_config >> "displayName"),
+                0 // Временное значение (Рядовой)
             ];
         };
     } forEach _allVehicleClasses;
     
     // Сортировка по цене (от дешевых к дорогим)
     _filtered sort true;
-    
     _filtered // Возвращаем результат
 };
 
@@ -107,12 +145,9 @@ if (isServer) then {
     
     // 1. Стандартная фильтрация
     vehicleShop_vehicles = [_allVehicleClasses] call vehicleShop_filterVehicles;
-    
     // 2. Применение кастомных цен (ВАЖНО: после фильтрации!)
     vehicleShop_vehicles = [vehicleShop_vehicles] call vehicleShop_customPrices;
     
     // 3. Синхронизация
     publicVariable "vehicleShop_vehicles";
-    diag_log format ["[VehicleShop] Загружено %1 единиц техники", count vehicleShop_vehicles];
-    diag_log format ["[VehicleShop] Пример техники: %1", vehicleShop_vehicles select 0];
 };

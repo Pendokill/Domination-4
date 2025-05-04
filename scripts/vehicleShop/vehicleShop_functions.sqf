@@ -32,7 +32,7 @@ vehicleShop_populateList = {
                 
                 private _displayName = getText(_vehicle >> "displayName");
                 private _cost = round ((getNumber(_vehicle >> "armor") + (getNumber(_vehicle >> "maxSpeed")/10)) / 2;
-                _cost = (_cost max 10) min 1000; // Ограничиваем стоимость
+                _cost = (_cost max 10) min 2000; // Ограничиваем стоимость
                 
                 _allVehicles pushBack [_className, _cost, _displayName];
             };
@@ -47,4 +47,35 @@ vehicleShop_populateList = {
     publicVariable "vehicleShop_vehicles";
     
     diag_log format ["[VehicleShop] Загружено %1 единиц техники для фракции %2", count _allVehicles, _faction];
+};
+
+/*
+    vehicleShop_functions.sqf
+    Дополнительные функции магазина техники
+*/
+
+// Функция получения текущего ранга игрока с учетом системы миссии
+vehicleShop_getPlayerRank = {
+    params ["_player"];
+    
+    // Пытаемся получить ранг из системы миссии
+    private _customRank = _player getVariable ["domination_player_rank", nil];
+    if (!isNil "_customRank") exitWith { _customRank };
+    
+    // Если система миссии не предоставляет ранг, используем стандартный
+    rank _player
+};
+
+// Модифицированная функция проверки ранга
+vehicleShop_checkRank = {
+    params ["_player", "_requiredRank"];
+    
+    private _currentRank = [_player] call vehicleShop_getPlayerRank;
+    private _currentIndex = _rankSystem find _currentRank;
+    private _requiredIndex = _rankSystem find _requiredRank;
+    
+    if (_currentIndex == -1) exitWith { false };
+    if (_requiredIndex == -1) exitWith { true };
+    
+    _currentIndex >= _requiredIndex
 };

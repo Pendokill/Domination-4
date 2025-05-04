@@ -8,18 +8,18 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=443;
+		nextID=454;
 	};
 	class MarkerIDProvider
 	{
-		nextID=109;
+		nextID=106;
 	};
 	class Camera
 	{
-		pos[]={1878.6938,10.00725,5760.1826};
-		dir[]={0.88787436,-0.43298107,-0.1555846};
-		up[]={0.42648271,0.90140301,-0.074733712};
-		aside[]={-0.17260271,-7.4505806e-09,-0.98499155};
+		pos[]={1859.6901,19.21903,5766.4517};
+		dir[]={0.92180401,-0.34668064,-0.17346494};
+		up[]={0.34070078,0.93798327,-0.064113021};
+		aside[]={-0.18493396,0,-0.98275107};
 	};
 };
 binarizationWanted=0;
@@ -563,7 +563,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=236;
+		items=237;
 		class Item0
 		{
 			dataType="Marker";
@@ -1972,7 +1972,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={1911.9283,5.6914392,5754.5327};
+						position[]={1893.3929,5.6914387,5758.854};
 						angles[]={0,4.855628,0};
 					};
 					side="East";
@@ -2106,7 +2106,6 @@ class Mission
 					};
 					id=330;
 					type="rhs_vmf_emr_officer_armored";
-					atlOffset=4.7683716e-07;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -2156,7 +2155,6 @@ class Mission
 			{
 			};
 			id=144;
-			atlOffset=4.7683716e-07;
 		};
 		class Item116
 		{
@@ -3667,7 +3665,7 @@ class Mission
 			text="Аванпост";
 			type="b_service";
 			colorName="ColorEAST";
-			angle=28.015368;
+			angle=28.015388;
 			id=279;
 			atlOffset=0.0001373291;
 		};
@@ -10837,8 +10835,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1886.8265,6.263761,5755.3467};
-				angles[]={6.2806892,4.8711963,0.0024958209};
+				position[]={1888.3334,6.2783155,5760.0337};
+				angles[]={0,4.8711963,0};
 			};
 			side="Empty";
 			flags=4;
@@ -10846,8 +10844,17 @@ class Mission
 			{
 				name="stand1";
 			};
-			id=437;
+			id=430;
 			type="Land_InfoStand_V2_F";
+			atlOffset=-9.059906e-06;
+		};
+		class Item236
+		{
+			dataType="Marker";
+			position[]={1876.3121,5.634625,5752.6128};
+			name="vehicle_spawn";
+			type="Empty";
+			id=431;
 		};
 	};
 };
