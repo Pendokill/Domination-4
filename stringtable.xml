@@ -19160,3 +19160,52 @@
 </Container>
 </Package>
 </Project>
+<Project name="Domination4_VehicleShop">
+    <Package name="VehicleShop">
+        <!-- Сообщения магазина -->
+        <Key ID="STR_VehicleShop_ActionTitle">
+            <English>Vehicle Shop</English>
+            <Russian>Магазин техники</Russian>
+        </Key>
+        <Key ID="STR_VehicleShop_ScoreAndRank">
+            <English>SCORE: %1 | RANK: %2</English>
+            <Russian>ВАШ СЧЁТ: %1 | ЗВАНИЕ: %2</Russian>
+        </Key>
+        <Key ID="STR_VehicleShop_RankRequired">
+            <English>Rank %1 or higher required!</English>
+            <Russian>Требуется звание %1 или выше!</Russian>
+        </Key>
+        <Key ID="STR_VehicleShop_PointsRequired">
+            <English>Need %1 points (You have: %2)</English>
+            <Russian>Нужно %1 очков (У вас: %2)</Russian>
+        </Key>
+        <Key ID="STR_VehicleShop_SelectVehicle">
+            <English>Select a vehicle from the list!</English>
+            <Russian>Выберите технику из списка!</Russian>
+        </Key>
+        <Key ID="STR_VehicleShop_PurchaseProcessing">
+            <English>Processing purchase...</English>
+            <Russian>Обработка покупки...</Russian>
+        </Key>
+        <Key ID="STR_VehicleShop_TooltipAvailable">
+            <English>Price: %1 points\nRank: %2</English>
+            <Russian>Цена: %1 очей\nЗвание: %2</Russian>
+        </Key>
+        <Key ID="STR_VehicleShop_TooltipNotAvailable">
+            <English>Price: %1 points\nRank: %2</English>
+            <Russian>Цена: %1 очей\nЗвание: %2</Russian>
+        </Key>
+        <Key ID="STR_VehicleShop_RankNotEnough">
+            <English>\nInsufficient rank!</English>
+            <Russian>\nНедостаточное звание!</Russian>
+        </Key>
+        <Key ID="STR_VehicleShop_PointsNotEnough">
+            <English>\nNeed %1 points (have %2)</English>
+            <Russian>\nНужно %1 очей (есть %2)</Russian>
+        </Key>
+        <Key ID="STR_VehicleShop_DialogNotFound">
+            <English>Error: dialog not found</English>
+            <Russian>Ошибка: диалог не найден</Russian>
+        </Key>
+    </Package>
+</Project>

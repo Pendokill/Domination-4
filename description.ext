@@ -14,6 +14,11 @@ allowFunctionsLog = 1;
 
 arsenalRestrictedItems[] = {"launch_min_rf_titan_short","launch_MRAWS_green_rail_F","launch_MRAWS_green_F","launch_MRAWS_olive_rail_F","launch_MRAWS_olive_F","launch_MRAWS_sand_rail_F","launch_MRAWS_sand_F","launch_MRAWS_black_F","launch_MRAWS_black_rail_F","launch_MRAWS_coyote_rail_F","rhs_weap_maaws","rhs_weap_fgm148","launch_O_Vorona_green_F","launch_O_Vorona_brown_F"};
 
+#include "Rsc\Resources.hpp"
+#include "Rsc\Dialogs.hpp"
+#include "Rsc\Styles.hpp"
+#include "scripts\vehicleShop\vehicleShop_dialog.hpp"
+
 author = "Xeno/ред. Pirat";
 AZM_ADMINS_LIST[] = {"15a39336321839606a91bfd17de038bc"};
 OnLoadName = "Доминация 4!";
@@ -2093,19 +2098,6 @@ class Params {
 #include "dlg\PylonLoadoutDialog.hpp"
 #include "dlg\TransferScoreDialog.hpp"
 #include "dlg\AirTaxiDialog.hpp"
-#include "Rsc\Resources.hpp"
-#include "Rsc\Dialogs.hpp"
-#include "Rsc\Styles.hpp"
-#include "scripts\vehicleShop\vehicleShop_dialog.hpp"
-
-class CfgFunctions {
-    class VehicleShop {
-        class Functions {
-            file = "scripts\vehicleShop";
-            class init { postInit = 1; }; // Автозапуск после инициализации
-        };
-    };
-};
 
 class CfgSounds {
 	sounds[] = {d_IncomingChallenge2};

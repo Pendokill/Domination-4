@@ -806,4 +806,15 @@ class cfgFunctions {
 			addc(animchangedeh);
 		};
 	};
+	class VehicleShop {
+        tag = "vs"; // Добавляем тег для функций магазина
+        class Functions {
+            file = "scripts\vehicleShop";
+            class init { postInit = 1; };
+            class config { preInit = 1; };
+            class open {};
+            class purchase {};
+            class updateUI {};
+        };
+    };
 };

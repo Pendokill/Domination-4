@@ -9,9 +9,30 @@ if (productVersion # 2 < 218) exitWith {
 	forceEnd;
 };
 
-// Чтобы включить мод спавна техники на вашем сервере, но также получать уведомлени¤, когда пользователи используют его (режим читера)
+// Чтобы включить мод спавна техники на вашем сервере, но также получать уведомление, когда пользователи используют его (режим читера)
 // DCON_Garage_Enabled = 0;
 // publicVariable "DCON_Garage_Enabled";
+
+// Серверная часть инициализации магазина техники
+if (isServer) then {
+    [] spawn {
+        waitUntil {time > 5}; // Увеличено время ожидания
+        execVM "scripts\vehicleShop\vehicleShop_config.sqf";
+        waitUntil {!isNil "vehicleShop_configLoaded"};
+        diag_log "[VehicleShop] Конфигурация загружена, начинаем инициализацию";
+        execVM "scripts\vehicleShop\vehicleShop_init.sqf";
+    };
+};
+
+// Клиентская часть инициализации
+if (hasInterface) then {
+    [] spawn {
+        waitUntil {!isNull player && time > 10}; // Добавлена проверка времени
+        waitUntil {!isNil "vehicleShop_configLoaded" && !isNil "vehicleShop_vehicles"};
+        systemChat "Магазин техники инициализирован";
+        diag_log "[VehicleShop] Клиентская часть инициализирована";
+    };
+};
 
 if (isMultiplayer && {hasInterface}) then {
 	enableRadio true;
@@ -23,24 +44,6 @@ if (isMultiplayer && {hasInterface}) then {
 
 enableSaving [false,false];
 enableTeamSwitch false;
-
-// Серверная часть инициализации
-if (isServer) then {
-    [] spawn {
-        waitUntil {time > 1}; // Ждем немного после старта
-        execVM "scripts\vehicleShop\vehicleShop_config.sqf"; // Загрузка конфигурации
-        waitUntil {!isNil "vehicleShop_configLoaded"};
-        execVM "scripts\vehicleShop\vehicleShop_init.sqf"; // Основная инициализация
-    };
-};
-
-// Клиентская часть
-if (hasInterface) then {
-    [] spawn {
-        waitUntil {!isNull player && !isNil "vehicleShop_configLoaded"};
-        systemChat "Магазин техники инициализирован";
-    };
-};
 
 player exec "scripts\radioru.sqs";
 

@@ -1,18 +1,11 @@
-/*
+/*  
+    by Pirat
     vehicleShop_init.sqf
-    Финальная версия с исправлениями:
-    - Не моргает звание в интерфейсе
-    - Цветное выделение сообщений
-    - Новые пороги очков для званий
+    Полностью исправленная версия
 */
 
-// Ждем загрузки необходимых переменных
 waitUntil {!isNil "vehicleShop_configLoaded" && !isNil "vehicleShop_vehicles"};
-
-diag_log "[VehicleShop] Начало инициализации магазина техники";
-
-// Массив названий званий в правильном порядке
-vehicleShop_rankNames = ["Рядовой","Ефрейтор","Сержант","Лейтенант","Капитан","Майор","Полковник","Генерал"];
+diag_log "[VehicleShop] Инициализация интерфейса";
 
 // ====================== ОСНОВНЫЕ ФУНКЦИИ ======================
 
@@ -22,7 +15,6 @@ vehicleShop_rankNames = ["Рядовой","Ефрейтор","Сержант","�
 */
 vehicleShop_getPlayerRank = {
     params ["_player"];
-    
     // 1. Проверяем переменную dom_rank_index (основной способ)
     private _rankIndex = _player getVariable ["dom_rank_index", -1];
     
@@ -30,19 +22,18 @@ vehicleShop_getPlayerRank = {
     if (_rankIndex == -1) then {
         private _rankStr = toLower (_player getVariable ["dom_rank", ""]);
         if (_rankStr != "") then {
-            _rankIndex = switch (true) do {
-                case (_rankStr == "dom_private"): {0};
-                case (_rankStr == "dom_corporal"): {1};
-                case (_rankStr == "dom_sergeant"): {2};
-                case (_rankStr == "dom_lieutenant"): {3};
-                case (_rankStr == "dom_captain"): {4};
-                case (_rankStr == "dom_major"): {5};
-                case (_rankStr == "dom_colonel"): {6};
-                case (_rankStr == "dom_general"): {7};
+            _rankIndex = switch (_rankStr) do {
+                case "dom_private": {0};
+                case "dom_corporal": {1};
+                case "dom_sergeant": {2};
+                case "dom_lieutenant": {3};
+                case "dom_captain": {4};
+                case "dom_major": {5};
+                case "dom_colonel": {6};
+                case "dom_general": {7};
                 default {0};
             };
         } else {
-            // 3. Если ничего не найдено, используем score для определения ранга
             private _score = score _player;
             _rankIndex = switch (true) do {
                 case (_score >= 50000): {7}; // Генерал
@@ -56,11 +47,8 @@ vehicleShop_getPlayerRank = {
             };
         };
     };
-    
-    // Ограничиваем диапазон
-    _rankIndex = (_rankIndex max 0) min 7;
-    
-    _rankIndex
+    // Ограничиваем диапазон    
+    (_rankIndex max 0) min 7
 };
 
 /*
@@ -77,6 +65,8 @@ vehicleShop_getRankName = {
 */
 vehicleShop_checkRank = {
     params ["_player", "_requiredRankIndex"];
+    if (isNil "_requiredRankIndex") exitWith { false };
+    
     private _currentRank = [_player] call vehicleShop_getPlayerRank;
     _currentRank >= _requiredRankIndex
 };
@@ -91,7 +81,14 @@ vehicleShop_updateDetails = {
     if (isNull _dialog) exitWith {};
     
     private _detailsCtrl = _dialog displayCtrl 5004;
+    if (count vehicleShop_vehicles <= _selectedIndex) exitWith {
+        _detailsCtrl ctrlSetText "Ошибка загрузки данных";
+    };
+    
     private _vehicleData = vehicleShop_vehicles select _selectedIndex;
+    if (count _vehicleData < 4) exitWith {
+        _detailsCtrl ctrlSetText "Ошибка конфигурации";
+    };
     
     _vehicleData params ["_className", "_cost", "_displayName", "_requiredRankIndex"];
     
@@ -102,71 +99,81 @@ vehicleShop_updateDetails = {
     private _crew = getText(_config >> "crew");
     private _picture = getText(_config >> "picture");
     private _desc = getText(_config >> "Library" >> "libTextDesc");
-    
+    private _modIcon = [_className] call vehicleShop_getModIcon;
     // Проверяем доступность по рангу
     private _rankCheck = [player, _requiredRankIndex] call vehicleShop_checkRank;
     private _requiredRankName = [_requiredRankIndex] call vehicleShop_getRankName;
-    private _rankColor = if (_rankCheck) then {"#00FF00"} else {"#FF0000"};
     
     // Формируем текст описания
     _detailsCtrl ctrlSetStructuredText parseText format [
         "<t font='RobotoCondensed' size='1.8'>
         <img image='%5' size='5' align='center'/><br/><br/>
-        <t font='RobotoCondensedBold' size='2'>%1</t><br/><br/>
+        %10<t font='RobotoCondensedBold' size='2'>%1</t><br/><br/>
         <t color='#FFD700'>Цена: %2 очков</t><br/>
         <t color='%9'>▸ Требуется звание: %8</t><br/><br/>
         ▸ Скорость: %3 км/ч<br/>
         ▸ Броня: %4<br/>
         ▸ Экипаж: %6<br/><br/>
         %7</t>",
-        _displayName, _cost, _maxSpeed, _armor, _picture, _crew, _desc, _requiredRankName, _rankColor
+        _displayName, _cost, _maxSpeed, _armor, _picture, _crew, _desc, 
+        _requiredRankName, if (_rankCheck) then {"#00FF00"} else {"#FF0000"},
+        if (_modIcon != "") then {format ["<img image='%1' size='1.5' align='right'/><br/>", _modIcon]} else {""}
     ];
 };
 
-/*
-    Функция обновления интерфейса
-    с исправлением моргания звания
-*/
+vehicleShop_toggleMode = {
+    if (!hasInterface) exitWith {};
+    
+    if !(serverCommandAvailable "#logout" || isServer) exitWith {
+        hint parseText "<t color='#FF0000'>Только для администратора!</t>";
+        playSound "FD_Start_F";
+    };
+    
+    private _newMode = abs (vehicleShop_loadMode - 1);
+    [_newMode] remoteExec ["vehicleShop_setLoadMode", 2];
+    
+    hint parseText format [
+        "<t color='#FFD700'>Режим изменен</t><br/>Теперь: %1", 
+        ["Автоматический","Ручной"] select _newMode
+    ];
+};
+
 vehicleShop_updateUI = {
     if (!hasInterface) exitWith {};
     
     private _dialog = findDisplay 5000;
     if (isNull _dialog) exitWith {};
     
+    // Обновляем отображение очков и звания (один раз)
+    private _pointsText = _dialog displayCtrl 5003;
+    private _currentPoints = score player;
+    private _currentRank = [player] call vehicleShop_getPlayerRank;
+    _pointsText ctrlSetText format [
+        "ОЧКИ: %1 | ЗВАНИЕ: %2", 
+        _currentPoints, 
+        [_currentRank] call vehicleShop_getRankName
+    ];
+    
     private _vehicleList = _dialog displayCtrl 5001;
     lbClear _vehicleList;
     
-    // Получаем актуальные данные игрока один раз
-    private _currentPoints = score player;
-    private _currentRankIndex = [player] call vehicleShop_getPlayerRank;
-    private _currentRankName = [_currentRankIndex] call vehicleShop_getRankName;
-    
-    // Обновляем отображение очков и звания (один раз)
-    private _pointsText = _dialog displayCtrl 5003;
-    _pointsText ctrlSetText format ["ОЧКИ: <t color='#FFD700'>%1</t> | ЗВАНИЕ: <t color='#00FF00'>%2</t>", 
-        _currentPoints, 
-        _currentRankName
-    ];
-    
-    // Заполняем список техники
     {
-        _x params ["_className", "_cost", "_displayName", "_requiredRankIndex"];
-        private _picture = getText(configFile >> "CfgVehicles" >> _className >> "picture");
-        private _index = _vehicleList lbAdd format ["▸ %1", _displayName];
+        if (count _x < 4) then { continue };
         
+        _x params ["_className", "_cost", "_displayName", "_requiredRankIndex"];
+        
+        private _index = _vehicleList lbAdd format ["▸ %1", _displayName];
         _vehicleList lbSetData [_index, _className];
         _vehicleList lbSetValue [_index, _cost];
-        _vehicleList lbSetPicture [_index, _picture];
+        _vehicleList lbSetPicture [_index, getText(configFile >> "CfgVehicles" >> _className >> "picture")];
         
         // Проверяем доступность
         private _rankCheck = [player, _requiredRankIndex] call vehicleShop_checkRank;
         private _pointsCheck = _currentPoints >= _cost;
         
-        if (_rankCheck && _pointsCheck) then {
-            _vehicleList lbSetColor [_index, [0.8, 1, 0.8, 1]]; // Доступно
-        } else {
-            _vehicleList lbSetColor [_index, [1, 0.3, 0.3, 0.7]]; // Недоступно
-        };
+        _vehicleList lbSetColor [_index, 
+            if (_rankCheck && _pointsCheck) then {[0.8,1,0.8,1]} else {[1,0.3,0.3,0.7]} // Доступно - Недоступно
+        ];
     } forEach vehicleShop_vehicles;
     
     // Автовыбор первой техники
@@ -185,53 +192,58 @@ vehicleShop_purchase = {
     
     private _dialog = findDisplay 5000;
     if (isNull _dialog) exitWith {
-        hint "Ошибка: диалог не найден";
+        hint parseText "<t color='#FF0000'>Ошибка: диалог не найден</t>";
     };
     
     private _vehicleList = _dialog displayCtrl 5001;
     private _selectedIndex = lbCurSel _vehicleList;
     
     if (_selectedIndex == -1) exitWith {
-        hint "Выберите технику из списка!";
+        hint parseText "<t color='#FFD700'>Выберите технику!</t>";
     };
     
-    private _className = _vehicleList lbData _selectedIndex;
-    private _cost = _vehicleList lbValue _selectedIndex;
-    private _currentPoints = score player;
+    if (count vehicleShop_vehicles <= _selectedIndex) exitWith {
+        hint parseText "<t color='#FF0000'>Ошибка данных</t>";
+    };
+    
     private _vehicleData = vehicleShop_vehicles select _selectedIndex;
-    private _requiredRankIndex = _vehicleData select 3;
-    private _requiredRankName = [_requiredRankIndex] call vehicleShop_getRankName;
-    private _displayName = getText(configFile >> "CfgVehicles" >> _className >> "displayName");
+    if (count _vehicleData < 4) exitWith {
+        hint parseText "<t color='#FF0000'>Ошибка конфигурации</t>";
+    };
     
-    // Проверка ранга
-    private _playerRankIndex = [player] call vehicleShop_getPlayerRank;
-    private _rankCheck = [player, _requiredRankIndex] call vehicleShop_checkRank;
+    _vehicleData params ["_className", "_cost", "_displayName", "_requiredRankIndex"];
     
-    if (!_rankCheck) exitWith {
+    if !([player, _requiredRankIndex] call vehicleShop_checkRank) exitWith {
         hint parseText format [
-            "Требуется звание: <t color='#00FF00'>%1</t><br/>Ваше звание: <t color='#00FF00'>%2</t><br/>Ваши очки: <t color='#00FF00'>%3</t>",
-            _requiredRankName, 
-            [_playerRankIndex] call vehicleShop_getRankName,
-            _currentPoints
+            "<t color='#FF0000'>Недостаточно звания!</t><br/>Требуется: <t color='#00FF00'>%1</t>",
+            [_requiredRankIndex] call vehicleShop_getRankName
         ];
     };
     
-    if (_currentPoints < _cost) exitWith {
+    if (score player < _cost) exitWith {
         hint parseText format [
-            "Недостаточно очков!<br/>Нужно: <t color='#00FF00'>%1</t><br/>У вас: <t color='#00FF00'>%2</t>", 
-            _cost, 
-            _currentPoints
+            "<t color='#FF0000'>Недостаточно очков!</t><br/>Нужно: %1 | У вас: %2",
+            _cost, score player
         ];
     };
     
     [player, _cost, _className] remoteExec ["vehicleShop_serverPurchase", 2];
-    hint parseText format ["Техника <t color='#FFD700'>%1</t> успешно куплена!", _displayName];
+    hint parseText format ["<t color='#00FF00'>Куплено:</t> %1", _displayName];
 };
 
 /*
     Функция покупки техники (серверная часть)
     с цветным выделением сообщений
 */
+/*  
+    Полная система магазина техники
+    Включает:
+    - Умный спавн без наложений
+    - Маркеры с динамическим отображением
+    - Систему блокировки для владельца
+    - Интеграцию с системой подцепки
+*/
+
 vehicleShop_serverPurchase = {
     params ["_player", "_cost", "_className"];
     
@@ -239,67 +251,235 @@ vehicleShop_serverPurchase = {
         _this remoteExec ["vehicleShop_serverPurchase", 2];
     };
     
-    // Находим технику в списке
+    // =============================================
+    // 1. ПОИСК ТЕХНИКИ В МАГАЗИНЕ
+    // =============================================
     private _vehicleIndex = -1;
     {
         if ((_x select 0) == _className) exitWith { _vehicleIndex = _forEachIndex };
     } forEach vehicleShop_vehicles;
     
     if (_vehicleIndex == -1) exitWith {
-        ["Ошибка: техника не найдена"] remoteExec ["hint", _player];
+        ["Техника не найдена"] remoteExec ["hint", _player];
+        diag_log format ["[VehicleShop] Ошибка: класс %1 не найден", _className];
     };
     
-    // Проверяем ранг на сервере
-    private _requiredRankIndex = (vehicleShop_vehicles select _vehicleIndex) select 3;
-    private _rankCheck = [_player, _requiredRankIndex] call vehicleShop_checkRank;
-    
-    if (!_rankCheck) exitWith {
-        private _playerRankIndex = [_player] call vehicleShop_getPlayerRank;
-        [parseText format [
-            "Требуется звание: <t color='#00FF00'>%1</t><br/>Ваше звание: <t color='#00FF00'>%2</t>",
-            [_requiredRankIndex] call vehicleShop_getRankName,
-            [_playerRankIndex] call vehicleShop_getRankName
-        ]] remoteExec ["hint", _player];
-    };
-    
-    // Проверяем очки
-    if (score _player < _cost) exitWith {
-        [parseText format [
-            "Недостаточно очков!<br/>Нужно: <t color='#00FF00'>%1</t><br/>У вас: <t color='#00FF00'>%2</t>",
-            _cost,
-            score _player
-        ]] remoteExec ["hint", _player];
-    };
-    
-    // Списание очков и создание техники
-    _player addScore -_cost;
-    private _spawnPos = getMarkerPos vehicleShop_spawnMarker;
-    private _vehicle = createVehicle [_className, _spawnPos, [], 0, "CAN_COLLIDE"];
-    _vehicle setDir (markerDir vehicleShop_spawnMarker);
-    
-    // Уведомление игрока с цветным выделением
+    private _vehicleData = vehicleShop_vehicles select _vehicleIndex;
     private _displayName = getText(configFile >> "CfgVehicles" >> _className >> "displayName");
-    [parseText format ["Техника <t color='#FFD700'>%1</t> успешно куплена!", _displayName]] remoteExec ["hint", _player];
+
+    // =============================================
+    // 2. СПАВН ТЕХНИКИ С КОНТРОЛЕМ КОЛЛИЗИЙ
+    // =============================================
+    private _spawnPos = getMarkerPos vehicleShop_spawnMarker;
+    private _spawnDir = markerDir vehicleShop_spawnMarker;
+    
+    private _safePos = [_spawnPos, 0, 30, 7, 0, 0.7, 0, [], [_spawnPos, _spawnPos]] call BIS_fnc_findSafePos;
+    
+    if (_safePos isEqualTo [] || {_safePos distance _spawnPos > 50}) then {
+        _safePos = _spawnPos;
+        ["Не удалось найти свободное место"] remoteExec ["systemChat", _player];
+    };
+    
+    private _veh = createVehicle [_className, _safePos, [], 0, "CAN_COLLIDE"];
+    _veh setDir _spawnDir;
+    _veh setPosATL [_safePos select 0, _safePos select 1, 0];
+
+    // =============================================
+    // 3. СИСТЕМА МАРКЕРОВ (ПОЛНАЯ ВЕРСИЯ)
+    // =============================================
+    private _playerName = name _player;
+    private _markerName = format ["shop_veh_%1_%2", _playerName, round (random 10000)];
+    
+    createMarker [_markerName, _safePos];
+    _markerName setMarkerType "mil_box";
+    _markerName setMarkerColor "ColorRed";
+    _markerName setMarkerText format ["%1 (%2)", _displayName, _playerName];
+    _markerName setMarkerSize [0.7, 0.7];
+    
+    _veh setVariable ["d_shop_marker", _markerName, true];
+    _veh setVariable ["d_shop_owner", _playerName, true];
+    _veh setVariable ["d_is_destroyed", false, true];
+    _veh setVariable ["d_has_crew", false, true];
+
+    // --------------------------------------------
+    // 3.1 ОБРАБОТЧИКИ СОСТОЯНИЯ
+    // --------------------------------------------
+    _veh addEventHandler ["GetIn", {
+        params ["_veh"];
+        _veh setVariable ["d_has_crew", true, true];
+        private _markerName = _veh getVariable "d_shop_marker";
+        if (!isNil "_markerName") then {
+            _markerName setMarkerAlpha 0;
+        };
+    }];
+    
+    _veh addEventHandler ["GetOut", {
+        params ["_veh"];
+        _veh setVariable ["d_has_crew", false, true];
+        private _markerName = _veh getVariable "d_shop_marker";
+        if (!isNil "_markerName" && {damage _veh < 0.9}) then {
+            _markerName setMarkerAlpha 1;
+        };
+    }];
+
+    _veh addEventHandler ["Killed", {
+        params ["_veh"];
+        private _markerName = _veh getVariable "d_shop_marker";
+        private _playerName = _veh getVariable "d_shop_owner";
+        
+        if (!isNil "_markerName") then {
+            _markerName setMarkerColor "ColorBlack";
+            _markerName setMarkerText format ["Разбитый %1 (%2)", 
+                getText(configFile >> "CfgVehicles" >> typeOf _veh >> "displayName"),
+                _playerName
+            ];
+            _markerName setMarkerAlpha 1;
+            _veh setVariable ["d_is_destroyed", true, true];
+        };
+    }];
+
+    // --------------------------------------------
+    // 3.2 ОБРАБОТЧИК РЕМОНТА (ВАЖНО!)
+    // --------------------------------------------
+    _veh addEventHandler ["HandleDamage", {
+        params ["_veh", "_selection", "_damage", "_source", "_projectile", "_hitIndex", "_instigator", "_hitPoint"];
+        
+        // Если техника была разбита и теперь ремонтируется
+        if (_veh getVariable ["d_is_destroyed", false] && {_damage < 0.9}) then {
+            private _markerName = _veh getVariable "d_shop_marker";
+            private _playerName = _veh getVariable "d_shop_owner";
+            
+            if (!isNil "_markerName") then {
+                _markerName setMarkerColor "ColorRed";
+                _markerName setMarkerText format ["%1 (%2)", 
+                    getText(configFile >> "CfgVehicles" >> typeOf _veh >> "displayName"),
+                    _playerName
+                ];
+                _veh setVariable ["d_is_destroyed", false, true];
+                diag_log format ["[VehicleShop] Техника %1 восстановлена после ремонта", typeOf _veh];
+            };
+        };
+        
+        _damage // Возвращаем стандартную обработку повреждений
+    }];
+
+    // =============================================
+    // 4. СИСТЕМА БЛОКИРОВКИ (ПОЛНАЯ ВЕРСИЯ)
+    // =============================================
+    private _playerUID = getPlayerUID _player;
+    _veh setVariable ["vehicle_owner", _playerUID, true];
+    _veh setVariable ["vehicle_locked", false, true];
+    
+    // Функция добавления действия блокировки
+    private _addLockAction = {
+        params ["_veh"];
+        
+        _veh addAction [
+            "<t color='#FFA500'>[Замок]</t> Открыть/Закрыть технику",
+            {
+                params ["_target", "_caller"];
+                private _locked = _target getVariable ["vehicle_locked", false];
+                private _owner = _target getVariable "vehicle_owner";
+                
+                if (getPlayerUID _caller == _owner) then {
+                    _target setVariable ["vehicle_locked", !_locked, true];
+                    _target lock _locked;
+                    
+                    hint parseText format [
+                        "<t color='%1'>Техника %2</t>",
+                        if (_locked) then {"#00FF00"} else {"#FF0000"},
+                        if (_locked) then {"разблокирована"} else {"заблокирована"}
+                    ];
+                } else {
+                    hint "Только владелец может управлять замком";
+                };
+            },
+            nil,
+            1.5,
+            true,
+            true,
+            "",
+            "alive _target && {player distance _target < 5}",
+            5
+        ];
+    };
+    
+    // Добавляем действие сразу
+    [_veh] call _addLockAction;
+    
+    // Восстановление действия после ремонта
+    _veh addEventHandler ["HandleDamage", {
+        params ["_veh", "_selection", "_damage", "_source", "_projectile", "_hitIndex", "_instigator", "_hitPoint"];
+        
+        if (_damage < 0.9 && {_veh getVariable ["d_is_destroyed", false]}) then {
+            // Удаляем старые действия
+            private _actions = _veh getVariable ["BIS_fnc_holdActionAdd", []];
+            { _veh removeAction _x } forEach _actions;
+            
+            // Добавляем заново
+            [_veh] call (_veh getVariable ["d_lock_action_fn", {}]);
+            
+            diag_log "[VehicleShop] Действие блокировки восстановлено после ремонта";
+        };
+        
+        _damage
+    }];
+    
+    // Сохраняем функцию для восстановления
+    _veh setVariable ["d_lock_action_fn", _addLockAction];
+
+    // =============================================
+    // 5. СИСТЕМА ОБНОВЛЕНИЯ ПОЗИЦИИ МАРКЕРА
+    // =============================================
+    [_veh, _markerName] spawn {
+        params ["_veh", "_markerName"];
+        
+        while {alive _veh || {!isNull _veh && {_veh getVariable ["d_is_destroyed", false]}}} do {
+            if (!isNull _veh && {!(_veh getVariable ["d_has_crew", false])}) then {
+                _markerName setMarkerPos (getPos _veh);
+            };
+            sleep 0.3;
+        };
+        
+        if (markerType _markerName != "") then {
+            deleteMarker _markerName;
+        };
+    };
+
+    // =============================================
+    // 6. ИНТЕГРАЦИЯ С СИСТЕМОЙ ПОДЦЕПКИ
+    // =============================================
+    _veh setVariable ["d_canbewlifted", true, true];
+    _veh setVariable ["d_isspecialvec", true, true];
+    
+    // =============================================
+    // 7. ФИНАЛЬНЫЕ ОПЕРАЦИИ
+    // =============================================
+    _player addScore -_cost;
+    [parseText format ["<t color='#00FF00'>%1</t> создана", _displayName]] remoteExec ["hint", _player];
+    
+    diag_log format [
+        "[VehicleShop] Игрок %1 (%2) купил %3 за %4 очков",
+        _playerName,
+        _playerUID,
+        _className,
+        _cost
+    ];
 };
 
-// ====================== ИНИЦИАЛИЗАЦИЯ МАГАЗИНА ======================
+// ====================== ИНИЦИАЛИЗАЦИЯ ИНТЕРФЕЙСА ======================
 
 // Поиск информационных стоек на карте
 if (isNil "vehicleShop_stands") then {
     vehicleShop_stands = allMissionObjects "Land_InfoStand_V2_F";
-    
     if (count vehicleShop_stands == 0) then {
-        private _pos = getPosATL player;
-        vehicleShop_stands = [createVehicle ["Land_InfoStand_V2_F", [_pos select 0, _pos select 1, 0], [], 0, "CAN_COLLIDE"]];
+        vehicleShop_stands = [createVehicle ["Land_InfoStand_V2_F", getPosATL player, [], 0, "CAN_COLLIDE"]];
     };
 };
-
 // Добавление действия к стойкам
 {
-    private _stand = _x;
-    _stand call { removeAllActions _this; };
-    
-    _stand addAction [
+    _x call { removeAllActions _this; };
+    _x addAction [
         "<t color='#FF0000'>[Магазин техники]</t>", 
         {
             if (hasInterface) then {
@@ -310,9 +490,8 @@ if (isNil "vehicleShop_stands") then {
         nil, 1.5, true, true, "",
         "playerSide == east && (player distance _target) < 3", 5
     ];
-    
-    _stand enableSimulation true;
-    _stand allowDamage false;
+    _x enableSimulation true;
+    _x allowDamage false;
 } forEach vehicleShop_stands;
 
 // Публикация функций для сети
@@ -323,15 +502,14 @@ publicVariable "vehicleShop_updateDetails";
 publicVariable "vehicleShop_updateUI";
 publicVariable "vehicleShop_purchase";
 publicVariable "vehicleShop_serverPurchase";
+publicVariable "vehicleShop_toggleMode";
 
-diag_log "[VehicleShop] Инициализация завершена";
-
+diag_log "[VehicleShop] Интерфейс готов";
 // Клиентская часть - автообновление (исправлено моргание)
 if (hasInterface) then {
     [] spawn {
         waitUntil {!isNull player};
         
-        // Кэшируем предыдущие значения
         private _lastPoints = -1;
         private _lastRank = -1;
         
@@ -339,36 +517,30 @@ if (hasInterface) then {
             if (!isNull (findDisplay 5000)) then {
                 private _dialog = findDisplay 5000;
                 private _currentPoints = score player;
-                private _currentRankIndex = [player] call vehicleShop_getPlayerRank;
-                
+                private _currentRank = [player] call vehicleShop_getPlayerRank;
                 // Обновляем только если значения изменились
-                if (_currentPoints != _lastPoints || _currentRankIndex != _lastRank) then {
+                if (_currentPoints != _lastPoints || _currentRank != _lastRank) then {
                     private _pointsText = _dialog displayCtrl 5003;
-                    private _currentRankName = [_currentRankIndex] call vehicleShop_getRankName;
-                    
-                    _pointsText ctrlSetText format ["ОЧКИ: <t color='#FFD700'>%1</t> | ЗВАНИЕ: <t color='#00FF00'>%2</t>", 
+                    _pointsText ctrlSetText format [
+                        "ОЧКИ: %1 | ЗВАНИЕ: %2", 
                         _currentPoints, 
-                        _currentRankName
+                        [_currentRank] call vehicleShop_getRankName
                     ];
                     
                     _lastPoints = _currentPoints;
-                    _lastRank = _currentRankIndex;
-                };
-                
+                    _lastRank = _currentRank;
+                    
                 // Обновляем цвета доступности
-                private _vehicleList = _dialog displayCtrl 5001;
-                for "_i" from 0 to (lbSize _vehicleList - 1) do {
-                    private _cost = _vehicleList lbValue _i;
-                    private _vehicleData = vehicleShop_vehicles select _i;
-                    private _requiredRankIndex = _vehicleData select 3;
-                    
-                    private _rankCheck = [player, _requiredRankIndex] call vehicleShop_checkRank;
-                    private _pointsCheck = score player >= _cost;
-                    
-                    if (_rankCheck && _pointsCheck) then {
-                        _vehicleList lbSetColor [_i, [0.8, 1, 0.8, 1]];
-                    } else {
-                        _vehicleList lbSetColor [_i, [1, 0.3, 0.3, 0.7]];
+                    private _vehicleList = _dialog displayCtrl 5001;
+                    for "_i" from 0 to (lbSize _vehicleList - 1) do {
+                        private _cost = _vehicleList lbValue _i;
+                        private _vehicleData = vehicleShop_vehicles select _i;
+                        
+                        if (count _vehicleData >= 4) then {
+                            private _requiredRank = _vehicleData select 3;
+                            private _available = [player, _requiredRank] call vehicleShop_checkRank && (_currentPoints >= _cost);
+                            _vehicleList lbSetColor [_i, if (_available) then {[0.8,1,0.8,1]} else {[1,0.3,0.3,0.7]}];
+                        };
                     };
                 };
             } else {
