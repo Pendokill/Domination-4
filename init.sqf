@@ -13,27 +13,6 @@ if (productVersion # 2 < 218) exitWith {
 // DCON_Garage_Enabled = 0;
 // publicVariable "DCON_Garage_Enabled";
 
-// Серверная часть инициализации магазина техники
-if (isServer) then {
-    [] spawn {
-        waitUntil {time > 5}; // Увеличено время ожидания
-        execVM "scripts\vehicleShop\vehicleShop_config.sqf";
-        waitUntil {!isNil "vehicleShop_configLoaded"};
-        diag_log "[VehicleShop] Конфигурация загружена, начинаем инициализацию";
-        execVM "scripts\vehicleShop\vehicleShop_init.sqf";
-    };
-};
-
-// Клиентская часть инициализации
-if (hasInterface) then {
-    [] spawn {
-        waitUntil {!isNull player && time > 10}; // Добавлена проверка времени
-        waitUntil {!isNil "vehicleShop_configLoaded" && !isNil "vehicleShop_vehicles"};
-        systemChat "Магазин техники инициализирован";
-        diag_log "[VehicleShop] Клиентская часть инициализирована";
-    };
-};
-
 if (isMultiplayer && {hasInterface}) then {
 	enableRadio true;
 	showChat false;
@@ -44,6 +23,20 @@ if (isMultiplayer && {hasInterface}) then {
 
 enableSaving [false,false];
 enableTeamSwitch false;
+
+// Серверная инициализация магазина
+if (isServer) then {
+    [] execVM "scripts\vehicleShop\vehicleShop_config.sqf";
+    [] execVM "scripts\vehicleShop\vehicleShop_init.sqf";
+};
+
+// Клиентская инициализация
+if (hasInterface) then {
+    [] spawn {
+        waitUntil {!isNull player && !isNil "vehicleShop_configLoaded"};
+        systemChat "Магазин техники готов к использованию";
+    };
+};
 
 player exec "scripts\radioru.sqs";
 
@@ -104,30 +97,6 @@ _year spawn {
 		};
 		setDate [_year, _st # 1, _st # 2, _st # 3, _st # 4];
 	};
-};
-
-// Клиентская проверка обновлений магазина
-if (hasInterface) then {
-    [] spawn {
-        waitUntil {!isNull player && !isNil "vehicleShop_vehicles"};
-        
-        while {true} do {
-            if (!isNull (findDisplay 5000)) then {
-                private _currentPoints = score player;
-                private _dialog = findDisplay 5000;
-                private _pointsText = _dialog displayCtrl 5003;
-                _pointsText ctrlSetText format ["ОЧКИ: %1", _currentPoints];
-                
-                // Обновление цветов в списке
-                private _vehicleList = _dialog displayCtrl 5001;
-                for "_i" from 0 to (lbSize _vehicleList - 1) do {
-                    _cost = _vehicleList lbValue _i;
-                    _vehicleList lbSetColor [_i, if (_currentPoints >= _cost) then {[1,1,1,1]} else {[1,0.3,0.3,0.7]}];
-                };
-            };
-            sleep 2;
-        };
-    };
 };
 
 diag_log [diag_frameno, diag_ticktime, time, "Dom init.sqf processed"];

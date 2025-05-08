@@ -16,7 +16,6 @@ arsenalRestrictedItems[] = {"launch_min_rf_titan_short","launch_MRAWS_green_rail
 
 #include "Rsc\Resources.hpp"
 #include "Rsc\Dialogs.hpp"
-#include "Rsc\Styles.hpp"
 #include "scripts\vehicleShop\vehicleShop_dialog.hpp"
 
 author = "Xeno/ред. Pirat";

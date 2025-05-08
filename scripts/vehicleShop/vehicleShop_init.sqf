@@ -72,6 +72,23 @@ vehicleShop_checkRank = {
 };
 
 /*
+    Функция получения значка мода для техники
+    (Добавлена новая функция)
+*/
+vehicleShop_getModIcon = {
+    params ["_className"];
+    private _modIcons = [
+        ["rhs_", "\rhsafrf\addons\rhs_main\data\rhs_logo_ca.paa"],
+        ["min_rf_", "\min_rf\addons\min_rf\data\ui\rf+logo.paa"],
+        ["FP_", "\FP_Core\Data\icons\fp_icon_ca.paa"],
+        ["CUP_", "\CUP\Vehicles\Data\icon\cup_icon_ca.paa"],
+        ["OPTRE_", "\OPTRE_Vehicles_Army\icons\optre_icon_ca.paa"]
+    ];
+    { if (_className find (_x select 0) == 0) exitWith { _x select 1 }; } forEach _modIcons;
+    ""
+};
+
+/*
     Функция обновления деталей техники
 */
 vehicleShop_updateDetails = {
@@ -165,9 +182,12 @@ vehicleShop_updateUI = {
         private _index = _vehicleList lbAdd format ["▸ %1", _displayName];
         _vehicleList lbSetData [_index, _className];
         _vehicleList lbSetValue [_index, _cost];
-        _vehicleList lbSetPicture [_index, getText(configFile >> "CfgVehicles" >> _className >> "picture")];
         
-        // Проверяем доступность
+        // Исправление: установка белого цвета для иконок
+        private _icon = getText(configFile >> "CfgVehicles" >> _className >> "picture");
+        _vehicleList lbSetPicture [_index, _icon];
+        _vehicleList lbSetPictureColor [_index, [1, 1, 1, 1]];
+        _vehicleList lbSetPictureColorSelected [_index, [1, 1, 1, 1]];
         private _rankCheck = [player, _requiredRankIndex] call vehicleShop_checkRank;
         private _pointsCheck = _currentPoints >= _cost;
         
@@ -387,11 +407,11 @@ vehicleShop_serverPurchase = {
                     
                     hint parseText format [
                         "<t color='%1'>Техника %2</t>",
-                        if (_locked) then {"#00FF00"} else {"#FF0000"},
-                        if (_locked) then {"разблокирована"} else {"заблокирована"}
+                        if (_locked) then {"#FF0000"} else {"#00FF00"},
+                        if (_locked) then {"заблокирована"} else {"разблокирована"}
                     ];
                 } else {
-                    hint "Только владелец может управлять замком";
+                    hint "Ключ от замка у хозяина техники!";
                 };
             },
             nil,
@@ -503,6 +523,7 @@ publicVariable "vehicleShop_updateUI";
 publicVariable "vehicleShop_purchase";
 publicVariable "vehicleShop_serverPurchase";
 publicVariable "vehicleShop_toggleMode";
+publicVariable "vehicleShop_getModIcon";
 
 diag_log "[VehicleShop] Интерфейс готов";
 // Клиентская часть - автообновление (исправлено моргание)

@@ -6,9 +6,13 @@ class EditorData
 	scaleGridStep=1;
 	autoGroupingDist=10;
 	toggles=513;
+	mods[]=
+	{
+		"3denEnhanced"
+	};
 	class ItemIDProvider
 	{
-		nextID=1125;
+		nextID=1132;
 	};
 	class MarkerIDProvider
 	{
@@ -16,63 +20,29 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={14492.228,21.711153,16319.901};
-		dir[]={0.6256724,-0.16903895,-0.76155829};
-		up[]={0.10731083,0.98560852,-0.13061723};
-		aside[]={-0.77267921,-4.0214218e-07,-0.63480759};
+		pos[]={14480.326,21.091413,16319.537};
+		dir[]={-0.38528737,-0.64379352,-0.66112578};
+		up[]={-0.32415724,0.76519728,-0.5562318};
+		aside[]={-0.86399007,-1.3560202e-07,0.50351107};
 	};
 };
 binarizationWanted=0;
-sourceName="co40_domination_4_rhs_opfor";
+sourceName="co40_domination_4m_rhs_opfor";
 addons[]=
 {
 	"A3_Ui_F",
 	"A3_Structures_F_Mil_Helipads",
 	"rhs_c_troops",
-	"rhs_faction_vdv",
-	"universal_uniforms_rhs",
 	"rhs_c_weapons",
-	"JAS_PEQ15",
 	"A3_Weapons_F",
 	"A3_Weapons_F_Mark",
-	"FP_Data_FaceWear",
-	"CL_Armbands",
-	"FP_TIGER_Headgears",
-	"FP_EAGLE_Vests",
-	"A3_Weapons_F_Enoch",
-	"A3_Weapons_F_Explosives",
 	"A3_Weapons_F_Items",
-	"FP_EAGLE_Headgears",
+	"min_rf_units",
+	"A3_Weapons_F_Enoch",
+	"rhsgref_c_weapons",
+	"A3_Weapons_F_Explosives",
 	"A3_Modules_F",
-	"A3_Weapons_F_Pistols_Rook40",
-	"min_rf_wp",
 	"A3_Characters_F",
-	"FP_TIGER_Uniforms",
-	"FP_TIGER_Vests",
-	"FP_RHS_Weapons",
-	"rhsusf_c_weapons",
-	"FP_Chechens_RedFor",
-	"FP_PMC_OG_B",
-	"FP_PMC_OG_G",
-	"FP_PMC_OG_R",
-	"rhs_faction_msv",
-	"FP_rhs_faction_vv",
-	"FP_NorthKorea",
-	"FP_Spetsnaz_Alpha",
-	"FP_Spetsnaz_FSB",
-	"FP_Spetsnaz_Vympel",
-	"A3_Weapons_F_Exp",
-	"FP_M21A_Galil",
-	"A3_Weapons_F_Mark_Acc",
-	"rhs_sounds",
-	"MANPAD_VERBA",
-	"Jason_AK105",
-	"FP_UAF",
-	"rhsgref_faction_chdkz_g",
-	"rhsgref_faction_chdkz",
-	"A3_Weapons_F_Acc",
-	"A3_Weapons_F_Orange",
-	"A3_Weapons_F_Tank",
 	"A3_Data_F_Exp_A_Virtual",
 	"A3_Modules_F_Curator_Curator",
 	"rhs_c_2s3",
@@ -95,14 +65,17 @@ addons[]=
 	"A3_Props_F_Enoch_Military_Camps",
 	"A3_Structures_F_Civ_InfoBoards",
 	"rhsusf_c_melb",
-	"FP_SOAR_Little_Bird",
-	"A3_Soft_F_Quadbike_01"
+	"A3_Soft_F_Quadbike_01",
+	"A3_Soft_F_MRAP_02",
+	"A3_Structures_F_Heli_Furniture",
+	"A3_Props_F_Argo_Items_Electronics",
+	"cba_xeh"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=61;
+		items=31;
 		class Item0
 		{
 			className="A3_Ui_F";
@@ -126,351 +99,195 @@ class AddonsMetaData
 		};
 		class Item3
 		{
-			className="rhs_faction_vdv";
-			name="rhs_faction_vdv";
-		};
-		class Item4
-		{
-			className="universal_uniforms_rhs";
-			name="universal_uniforms_rhs";
-		};
-		class Item5
-		{
 			className="rhs_c_weapons";
 			name="AFRF Weapons Pack";
 			author="Red Hammer Studios";
 			url="http://www.rhsmods.org/";
 		};
-		class Item6
-		{
-			className="JAS_PEQ15";
-			name="JAS_PEQ15";
-			author="Jason";
-		};
-		class Item7
+		class Item4
 		{
 			className="A3_Weapons_F";
 			name="Arma 3 Alpha - Weapons and Accessories";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item8
+		class Item5
 		{
 			className="A3_Weapons_F_Mark";
 			name="Arma 3 Marksmen - Weapons and Accessories";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item9
+		class Item6
 		{
-			className="FP_Data_FaceWear";
-			name="FP_Data_FaceWear";
+			className="min_rf_units";
+			name="min_rf_units";
 		};
-		class Item10
-		{
-			className="CL_Armbands";
-			name="CL_Armbands";
-		};
-		class Item11
-		{
-			className="FP_TIGER_Headgears";
-			name="FP_TIGER_Headgears";
-		};
-		class Item12
-		{
-			className="FP_EAGLE_Vests";
-			name="FP_EAGLE_Vests";
-		};
-		class Item13
+		class Item7
 		{
 			className="A3_Weapons_F_Enoch";
 			name="Arma 3 Contact Platform - Weapons and Accessories";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item14
+		class Item8
 		{
-			className="FP_EAGLE_Headgears";
-			name="FP_EAGLE_Headgears";
+			className="rhsgref_c_weapons";
+			name="GREF Weapons";
+			author="Red Hammer Studios";
+			url="http://www.rhsmods.org/";
 		};
-		class Item15
+		class Item9
 		{
 			className="A3_Modules_F";
 			name="Arma 3 Alpha - Scripted Modules";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item16
-		{
-			className="min_rf_wp";
-			name="min_rf_wp";
-		};
-		class Item17
+		class Item10
 		{
 			className="A3_Characters_F";
 			name="Arma 3 Alpha - Characters and Clothing";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item18
-		{
-			className="FP_TIGER_Uniforms";
-			name="FP_TIGER_Uniforms";
-		};
-		class Item19
-		{
-			className="FP_TIGER_Vests";
-			name="FP_TIGER_Vests";
-		};
-		class Item20
-		{
-			className="FP_RHS_Weapons";
-			name="FP_RHS_Weapons";
-		};
-		class Item21
-		{
-			className="rhsusf_c_weapons";
-			name="RHSUSF Weapons & Accessories";
-			author="Red Hammer Studios";
-			url="http://www.rhsmods.org/";
-		};
-		class Item22
-		{
-			className="FP_Chechens_RedFor";
-			name="FP_Chechens_RedFor";
-		};
-		class Item23
-		{
-			className="FP_PMC_OG_B";
-			name="FP_PMC_OG_B";
-		};
-		class Item24
-		{
-			className="FP_PMC_OG_G";
-			name="FP_PMC_OG_G";
-		};
-		class Item25
-		{
-			className="FP_PMC_OG_R";
-			name="FP_PMC_OG_R";
-		};
-		class Item26
-		{
-			className="rhs_faction_msv";
-			name="rhs_faction_msv";
-		};
-		class Item27
-		{
-			className="FP_rhs_faction_vv";
-			name="FP_rhs_faction_vv";
-		};
-		class Item28
-		{
-			className="FP_NorthKorea";
-			name="FP_NorthKorea";
-		};
-		class Item29
-		{
-			className="FP_Spetsnaz_Alpha";
-			name="FP_Spetsnaz_Alpha";
-		};
-		class Item30
-		{
-			className="FP_Spetsnaz_FSB";
-			name="FP_Spetsnaz_FSB";
-		};
-		class Item31
-		{
-			className="FP_Spetsnaz_Vympel";
-			name="FP_Spetsnaz_Vympel";
-		};
-		class Item32
-		{
-			className="A3_Weapons_F_Exp";
-			name="Arma 3 Apex - Weapons and Accessories";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
-		class Item33
-		{
-			className="FP_M21A_Galil";
-			name="FP_M21A_Galil";
-		};
-		class Item34
-		{
-			className="rhs_sounds";
-			name="AFRF Sounds";
-			author="Red Hammer Studios";
-			url="http://www.rhsmods.org/";
-		};
-		class Item35
-		{
-			className="MANPAD_VERBA";
-			name="VERBA";
-			author="Sem";
-		};
-		class Item36
-		{
-			className="Jason_AK105";
-			name="Jason_AK105";
-		};
-		class Item37
-		{
-			className="FP_UAF";
-			name="FP_UAF";
-		};
-		class Item38
-		{
-			className="rhsgref_faction_chdkz_g";
-			name="rhsgref_faction_chdkz_g";
-		};
-		class Item39
-		{
-			className="rhsgref_faction_chdkz";
-			name="rhsgref_faction_chdkz";
-		};
-		class Item40
-		{
-			className="A3_Weapons_F_Orange";
-			name="Arma 3 Orange - Weapons and Accessories";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
-		class Item41
-		{
-			className="A3_Weapons_F_Tank";
-			name="Arma 3 Tank - Weapons and Accessories";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
-		class Item42
+		class Item11
 		{
 			className="A3_Data_F_Exp_A";
 			name="Arma 3 Nexus Update - Main Configuration";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item43
+		class Item12
 		{
 			className="A3_Modules_F_Curator";
 			name="Arma 3 Zeus Update - Scripted Modules";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item44
+		class Item13
 		{
 			className="rhs_c_2s3";
 			name="2S3 SPG";
 			author="Red Hammer Studios";
 			url="http://www.rhsmods.org/";
 		};
-		class Item45
+		class Item14
 		{
 			className="rhs_c_a2port_air";
 			name="A2 ported air";
 			author="Red Hammer Studios";
 			url="http://www.rhsmods.org/";
 		};
-		class Item46
+		class Item15
 		{
 			className="rhs_c_trucks";
 			name="GAZ-66";
 			author="Red Hammer Studios";
 			url="http://www.rhsmods.org/";
 		};
-		class Item47
+		class Item16
 		{
 			className="A3_Structures_F_Ind";
 			name="Arma 3 - Industrial Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item48
+		class Item17
 		{
 			className="A3_Roads_F";
 			name="Arma 3 - Roads";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item49
+		class Item18
 		{
 			className="A3_Structures_F_EPA";
 			name="Arma 3 Survive Episode - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item50
+		class Item19
 		{
 			className="A3_Structures_F";
 			name="Arma 3 - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item51
+		class Item20
 		{
 			className="rhs_main";
 			name="rhs_main";
 			author="Red Hammer Studios";
 			url="http://www.rhsmods.org/";
 		};
-		class Item52
+		class Item21
 		{
 			className="A3_Soft_F_EPC";
 			name="Arma 3 Win Episode - Unarmored Land Vehicles";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item53
+		class Item22
 		{
 			className="A3_Soft_F_Gamma";
 			name="Arma 3 - Unarmored Land Vehicles";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item54
+		class Item23
 		{
 			className="rhs_c_heavyweapons";
 			name="Heavy weapons pack";
 			author="Red Hammer Studios";
 			url="http://www.rhsmods.org/";
 		};
-		class Item55
+		class Item24
 		{
 			className="rhs_c_a3retex";
 			name="A3 Retextures";
 			author="Red Hammer Studios";
 			url="http://www.rhsmods.org/";
 		};
-		class Item56
+		class Item25
 		{
 			className="A3_Props_F_AoW";
 			name="Arma 3 Art of War - Decorative and Mission ";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item57
+		class Item26
 		{
 			className="A3_Props_F_Enoch";
 			name="Arma 3 Contact Platform - Decorative and Mission Objects";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item58
+		class Item27
 		{
 			className="rhsusf_c_melb";
 			name="MELB";
 			author="Red Hammer Studios";
 			url="http://www.rhsmods.org/";
 		};
-		class Item59
-		{
-			className="FP_SOAR_Little_Bird";
-			name="FP_SOAR_Little_Bird";
-		};
-		class Item60
+		class Item28
 		{
 			className="A3_Soft_F";
 			name="Arma 3 Alpha - Unarmored Land Vehicles";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item29
+		{
+			className="A3_Structures_F_Heli";
+			name="Arma 3 Helicopters - Buildings and Structures";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item30
+		{
+			className="A3_Props_F_Argo";
+			name="Arma 3 Malden - Decorative and Mission Objects";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
@@ -479,17 +296,17 @@ class AddonsMetaData
 dlcs[]=
 {
 	"RHS_AFRF",
-	"JAS",
-	"RHS_USAF",
+	"min_rf_mod",
 	"Enoch",
-	"Mark",
-	"Expansion",
-	"AoW"
+	"AoW",
+	"RHS_USAF",
+	"Heli",
+	"Argo"
 };
 randomSeed=10318084;
 class ScenarioData
 {
-	author="Xeno/ред. Pirat";
+	author="Xeno/edit Pirat";
 };
 class CustomAttributes
 {
@@ -537,7 +354,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=414;
+		items=417;
 		class Item0
 		{
 			dataType="Marker";
@@ -615,7 +432,7 @@ class Mission
 			position[]={14193.6,19.5926,16269.2};
 			name="d_base_anti_air2";
 			type="Empty";
-			angle=227.69576;
+			angle=227.69565;
 			id=7;
 			atlOffset=6.6757202e-05;
 		};
@@ -773,7 +590,7 @@ class Mission
 			position[]={14166,20.5466,16191.5};
 			name="d_bonus_air_positions_5";
 			type="Empty";
-			angle=114.2499;
+			angle=114.24986;
 			id=23;
 			atlOffset=-6.4849854e-05;
 		};
@@ -1384,7 +1201,7 @@ class Mission
 			position[]={23210.1,3.1900001,18492.1};
 			name="d_sm_43_1";
 			type="Empty";
-			angle=114.48986;
+			angle=114.48968;
 			id=91;
 		};
 		class Item86
@@ -2452,8 +2269,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={14434.6,18.598301,16229.5};
-				angles[]={6.2778602,5.51859,6.2658601};
+				position[]={14490.437,18.181482,16259.247};
+				angles[]={6.2765174,5.51859,6.2751846};
 			};
 			side="Empty";
 			flags=4;
@@ -2465,7 +2282,6 @@ class Mission
 			};
 			id=208;
 			type="Land_HelipadSquare_F";
-			atlOffset=0.00070953369;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -2567,8 +2383,8 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={14486.7,18.847401,16317.1};
-						angles[]={6.2818899,2.2652199,0};
+						position[]={14486.7,18.847507,16317.1};
+						angles[]={6.2818937,2.2652278,0};
 					};
 					side="East";
 					flags=6;
@@ -2587,7 +2403,7 @@ class Mission
 								name="rhs_weap_akm_zenitco01_b33";
 								optics="rhs_acc_dh520x56";
 								muzzle="rhs_acc_pbs1";
-								flashlight="JAS_ANPEQ15_Blk";
+								underBarrel="rhs_acc_grip_ffg2";
 								class primaryMuzzleMag
 								{
 									name="rhs_30Rnd_762x39mm_bakelite";
@@ -2612,29 +2428,19 @@ class Mission
 							{
 								typeName="rhs_uniform_vdv_emr";
 								isBackpack=0;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="rhs_mag_rgd5";
-										count=2;
-										ammoLeft=1;
-									};
-								};
 								class ItemCargo
 								{
 									items=1;
 									class Item0
 									{
-										name="rhs_1PN138";
-										count=1;
+										name="FirstAidKit";
+										count=5;
 									};
 								};
 							};
 							class vest
 							{
-								typeName="rhsusf_plateframe_teamleader_aor1";
+								typeName="min_rf_armor_vest_flora";
 								isBackpack=0;
 								class MagazineCargo
 								{
@@ -2642,35 +2448,26 @@ class Mission
 									class Item0
 									{
 										name="rhs_mag_rgd5";
-										count=4;
+										count=3;
 										ammoLeft=1;
 									};
 									class Item1
 									{
 										name="75Rnd_762x39_Mag_Tracer_F";
-										count=1;
+										count=2;
 										ammoLeft=75;
 									};
 									class Item2
 									{
 										name="75Rnd_762x39_Mag_F";
-										count=1;
+										count=2;
 										ammoLeft=75;
 									};
 									class Item3
 									{
-										name="APERSBoundingMine_Range_Mag";
+										name="rhs_mag_f1";
 										count=2;
 										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
 									};
 								};
 							};
@@ -2680,26 +2477,32 @@ class Mission
 								isBackpack=1;
 								class MagazineCargo
 								{
-									items=4;
+									items=5;
 									class Item0
-									{
-										name="rhs_ec400_mag";
-										count=2;
-										ammoLeft=1;
-									};
-									class Item1
 									{
 										name="rhs_rpg7_PG7VL_mag";
 										count=3;
 										ammoLeft=1;
 									};
-									class Item2
+									class Item1
 									{
 										name="rhs_rpg7_OG7V_mag";
 										count=2;
 										ammoLeft=1;
 									};
+									class Item2
+									{
+										name="rhs_ec400_mag";
+										count=4;
+										ammoLeft=1;
+									};
 									class Item3
+									{
+										name="APERSBoundingMine_Range_Mag";
+										count=1;
+										ammoLeft=1;
+									};
+									class Item4
 									{
 										name="rhs_mag_rgd5";
 										count=2;
@@ -2711,8 +2514,8 @@ class Mission
 									items=1;
 									class Item0
 									{
-										name="FirstAidKit";
-										count=2;
+										name="ToolKit";
+										count=1;
 									};
 								};
 							};
@@ -2720,14 +2523,12 @@ class Mission
 							compass="ItemCompass";
 							watch="ItemWatch";
 							radio="ItemRadio";
-							goggles="FaceWear_Bandana_Skull_Shades_Blue";
-							hmd="CL_armbands_NOL";
-							headgear="FP_6B47_ESS_MULTICAM";
+							headgear="rhs_6b27m_digi_ess";
 						};
 					};
 					id=442;
 					type="rhs_vdv_des_officer";
-					atlOffset=-0.00010490417;
+					atlOffset=1.9073486e-06;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -2777,7 +2578,7 @@ class Mission
 			{
 			};
 			id=241;
-			atlOffset=-0.00010490417;
+			atlOffset=1.9073486e-06;
 		};
 		class Item193
 		{
@@ -2810,6 +2611,7 @@ class Mission
 								name="rhs_weap_akm_zenitco01_b33";
 								optics="rhs_acc_dh520x56";
 								muzzle="rhs_acc_pbs1";
+								underBarrel="rhs_acc_grip_ffg2";
 								class primaryMuzzleMag
 								{
 									name="rhs_30Rnd_762x39mm_bakelite";
@@ -2832,101 +2634,83 @@ class Mission
 							};
 							class uniform
 							{
-								typeName="rhs_uniform_vdv_emr_des";
+								typeName="rhs_uniform_vdv_emr";
 								isBackpack=0;
-								class MagazineCargo
+								class ItemCargo
 								{
 									items=1;
 									class Item0
 									{
-										name="rhs_mag_rgd5";
-										count=2;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
 										name="FirstAidKit";
-										count=1;
-									};
-									class Item1
-									{
-										name="rhs_1PN138";
-										count=1;
+										count=5;
 									};
 								};
 							};
 							class vest
 							{
-								typeName="rhsusf_plateframe_teamleader_toad_blkg";
+								typeName="min_rf_armor_vest_flora";
 								isBackpack=0;
 								class MagazineCargo
 								{
 									items=4;
 									class Item0
 									{
-										name="75Rnd_762x39_Mag_Tracer_F";
-										count=1;
-										ammoLeft=75;
+										name="rhs_mag_rgd5";
+										count=3;
+										ammoLeft=1;
 									};
 									class Item1
 									{
-										name="75Rnd_762x39_Mag_F";
-										count=1;
+										name="75Rnd_762x39_Mag_Tracer_F";
+										count=2;
 										ammoLeft=75;
 									};
 									class Item2
 									{
-										name="rhs_mag_rgd5";
-										count=5;
-										ammoLeft=1;
+										name="75Rnd_762x39_Mag_F";
+										count=2;
+										ammoLeft=75;
 									};
 									class Item3
 									{
-										name="APERSTripMine_Wire_Mag";
-										count=1;
+										name="rhs_mag_f1";
+										count=2;
 										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
 									};
 								};
 							};
 							class backpack
 							{
-								typeName="rhs_rd54_emr1";
+								typeName="min_rf_backpack_flora";
 								isBackpack=1;
 								class MagazineCargo
 								{
-									items=4;
+									items=5;
 									class Item0
-									{
-										name="rhs_ec400_mag";
-										count=2;
-										ammoLeft=1;
-									};
-									class Item1
 									{
 										name="rhs_rpg7_PG7VL_mag";
 										count=3;
 										ammoLeft=1;
 									};
-									class Item2
+									class Item1
 									{
 										name="rhs_rpg7_OG7V_mag";
 										count=2;
 										ammoLeft=1;
 									};
+									class Item2
+									{
+										name="rhs_ec400_mag";
+										count=4;
+										ammoLeft=1;
+									};
 									class Item3
+									{
+										name="APERSBoundingMine_Range_Mag";
+										count=1;
+										ammoLeft=1;
+									};
+									class Item4
 									{
 										name="rhs_mag_rgd5";
 										count=2;
@@ -2938,8 +2722,8 @@ class Mission
 									items=1;
 									class Item0
 									{
-										name="FirstAidKit";
-										count=2;
+										name="ToolKit";
+										count=1;
 									};
 								};
 							};
@@ -2947,9 +2731,7 @@ class Mission
 							compass="ItemCompass";
 							watch="ItemWatch";
 							radio="ItemRadio";
-							goggles="FaceWear_Bandana_Skull_Shades_Blue";
-							hmd="CL_armbands_NW";
-							headgear="FAST_MARITIME";
+							headgear="rhs_6b27m_digi_ess";
 						};
 					};
 					id=443;
@@ -3067,90 +2849,6 @@ class Mission
 						name="d_alpha_2";
 						description="Снайпер";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="rhs_weap_t5000";
-								optics="rhs_acc_dh520x56";
-								underBarrel="rhs_acc_harris_swivel";
-								class primaryMuzzleMag
-								{
-									name="rhs_5Rnd_338lapua_t5000";
-									ammoLeft=5;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_mg_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_5Rnd_338lapua_t5000";
-										count=29;
-										ammoLeft=5;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_marksman_pack";
-								isBackpack=1;
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NW";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=445;
 					type="rhs_vdv_des_marksman";
@@ -3215,114 +2913,6 @@ class Mission
 						init="this setGroupid [""Alpha""]";
 						name="d_alpha_5";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="rhs_weap_ak74mr_gp25";
-								optics="rhs_acc_1p87";
-								muzzle="rhs_acc_dtk2";
-								flashlight="rhs_acc_2dpZenit_ris";
-								class primaryMuzzleMag
-								{
-									name="rhs_45Rnd_545X39_7N10_AK";
-									ammoLeft=45;
-								};
-								class secondaryMuzzleMag
-								{
-									name="rhs_VOG25";
-									ammoLeft=1;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_grn_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=5;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_VOG25";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item2
-									{
-										name="rhs_VG40MD";
-										count=3;
-										ammoLeft=1;
-									};
-									class Item3
-									{
-										name="rhs_VG40OP_red";
-										count=2;
-										ammoLeft=1;
-									};
-									class Item4
-									{
-										name="rhs_45Rnd_545X39_7N10_AK";
-										count=5;
-										ammoLeft=45;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_grenadier_pack";
-								isBackpack=1;
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NW";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=447;
 					type="rhs_vdv_des_grenadier";
@@ -3374,98 +2964,6 @@ class Mission
 						init="this setGroupid [""Alpha""]";
 						name="d_alpha_6";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="bcb_weap_ak74m_zenitco01_tan2_spray";
-								optics="rhs_acc_1p63";
-								muzzle="rhs_acc_ak5";
-								flashlight="rhs_acc_2dpZenit_ris";
-								underBarrel="rhsusf_acc_kac_grip";
-								class primaryMuzzleMag
-								{
-									name="rhs_30Rnd_545x39_7N10_plum_AK";
-									ammoLeft=30;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=5;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="Medikit";
-										count=1;
-									};
-									class Item1
-									{
-										name="FirstAidKit";
-										count=7;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_medic_pack";
-								isBackpack=1;
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="Medikit";
-										count=1;
-									};
-									class Item1
-									{
-										name="FirstAidKit";
-										count=2;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NW";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=448;
 					type="rhs_vdv_des_medic";
@@ -3530,98 +3028,6 @@ class Mission
 						init="this setGroupid [""Alpha""]";
 						name="d_alpha_7";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="rhs_weap_pkp";
-								class primaryMuzzleMag
-								{
-									name="150Rnd_762x54_Box_Tracer";
-									ammoLeft=150;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_mg_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="150Rnd_762x54_Box_Tracer";
-										count=2;
-										ammoLeft=150;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_machinegunner_pack";
-								isBackpack=1;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="150Rnd_762x54_Box_Tracer";
-										count=4;
-										ammoLeft=150;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NW";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=449;
 					type="rhs_vdv_des_machinegunner";
@@ -3673,98 +3079,6 @@ class Mission
 						init="this setGroupid [""Alpha""]";
 						name="d_alpha_3";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="rhs_weap_pkp";
-								class primaryMuzzleMag
-								{
-									name="150Rnd_762x54_Box_Tracer";
-									ammoLeft=150;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_mg_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="150Rnd_762x54_Box_Tracer";
-										count=2;
-										ammoLeft=150;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_arifleman_pack";
-								isBackpack=1;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="150Rnd_762x54_Box_Tracer";
-										count=4;
-										ammoLeft=150;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NW";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=898;
 					type="rhs_vdv_des_arifleman";
@@ -3829,111 +3143,6 @@ class Mission
 						init="this setGroupid [""Alpha""]";
 						name="d_alpha_4";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="bcb_weap_ak74m_zenitco01_tan2_spray";
-								optics="rhs_acc_1p63";
-								muzzle="rhs_acc_ak5";
-								flashlight="rhs_acc_2dpZenit_ris";
-								underBarrel="rhsusf_acc_kac_grip";
-								class primaryMuzzleMag
-								{
-									name="rhs_30Rnd_545x39_7N10_plum_AK";
-									ammoLeft=30;
-								};
-							};
-							class secondaryWeapon
-							{
-								name="FP_Aegis_launch_RPG7M_F";
-								class primaryMuzzleMag
-								{
-									name="RPG7_F";
-									ammoLeft=1;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_30Rnd_545x39_7N10_plum_AK";
-										count=10;
-										ammoLeft=30;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_grenadier_rpg_pack";
-								isBackpack=1;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="RPG7_F";
-										count=3;
-										ammoLeft=1;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NW";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=917;
 					type="rhs_vdv_des_grenadier_rpg";
@@ -4193,111 +3402,6 @@ class Mission
 						init="this setGroupid [""Alpha""]";
 						name="d_alpha_8";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="bcb_weap_ak74m_zenitco01_tan2_spray";
-								optics="rhs_acc_1p63";
-								muzzle="rhs_acc_ak5";
-								flashlight="rhs_acc_2dpZenit_ris";
-								underBarrel="rhsusf_acc_kac_grip";
-								class primaryMuzzleMag
-								{
-									name="rhs_30Rnd_545x39_7N10_plum_AK";
-									ammoLeft=30;
-								};
-							};
-							class secondaryWeapon
-							{
-								name="FP_Aegis_launch_RPG7M_F";
-								class primaryMuzzleMag
-								{
-									name="RPG7_F";
-									ammoLeft=1;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_30Rnd_545x39_7N10_plum_AK";
-										count=10;
-										ammoLeft=30;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_grenadier_rpg_pack";
-								isBackpack=1;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="RPG7_F";
-										count=3;
-										ammoLeft=1;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NW";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=948;
 					type="rhs_vdv_des_grenadier_rpg";
@@ -4377,90 +3481,6 @@ class Mission
 						name="d_bravo_2";
 						description="Оператор";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="FP_SR3_v8";
-								optics="rhs_acc_1p63";
-								flashlight="rhs_acc_2dpZenit_ris";
-								class primaryMuzzleMag
-								{
-									name="30Rnd_762x39_AK12_Mag_F";
-									ammoLeft=30;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="30Rnd_762x39_AK12_Mag_F";
-										count=11;
-										ammoLeft=30;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_rifleman_asval_pack";
-								isBackpack=1;
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NO";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=476;
 					type="rhs_vdv_des_rifleman_asval";
@@ -4525,98 +3545,6 @@ class Mission
 						init="this setGroupid [""Bravo""]";
 						name="d_bravo_4";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="rhs_weap_pkp";
-								class primaryMuzzleMag
-								{
-									name="150Rnd_762x54_Box_Tracer";
-									ammoLeft=150;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_mg_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="150Rnd_762x54_Box_Tracer";
-										count=2;
-										ammoLeft=150;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_machinegunner_pack";
-								isBackpack=1;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="150Rnd_762x54_Box_Tracer";
-										count=4;
-										ammoLeft=150;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NO";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=477;
 					type="rhs_vdv_des_machinegunner";
@@ -4681,89 +3609,6 @@ class Mission
 						init="this setGroupid [""Bravo""]";
 						name="d_bravo_5";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="rhs_weap_svds_npz";
-								optics="optic_KHS_blk";
-								class primaryMuzzleMag
-								{
-									name="rhs_10Rnd_762x54mmR_7N14";
-									ammoLeft=10;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_10Rnd_762x54mmR_7N14";
-										count=19;
-										ammoLeft=10;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_marksman_asval_pack";
-								isBackpack=1;
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NO";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=478;
 					type="rhs_vdv_des_marksman_asval";
@@ -4828,98 +3673,6 @@ class Mission
 						init="this setGroupid [""Bravo""]";
 						name="d_bravo_6";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="bcb_weap_ak74m_zenitco01_tan2_spray";
-								optics="rhs_acc_1p63";
-								muzzle="rhs_acc_ak5";
-								flashlight="rhs_acc_2dpZenit_ris";
-								underBarrel="rhsusf_acc_kac_grip";
-								class primaryMuzzleMag
-								{
-									name="rhs_30Rnd_545x39_7N10_plum_AK";
-									ammoLeft=30;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=5;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="Medikit";
-										count=1;
-									};
-									class Item1
-									{
-										name="FirstAidKit";
-										count=7;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_medic_pack";
-								isBackpack=1;
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="Medikit";
-										count=1;
-									};
-									class Item1
-									{
-										name="FirstAidKit";
-										count=2;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NO";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=479;
 					type="rhs_vdv_des_medic";
@@ -4984,114 +3737,6 @@ class Mission
 						init="this setGroupid [""Bravo""]";
 						name="d_bravo_7";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="rhs_weap_ak74mr_gp25";
-								optics="rhs_acc_1p87";
-								muzzle="rhs_acc_dtk2";
-								flashlight="rhs_acc_2dpZenit_ris";
-								class primaryMuzzleMag
-								{
-									name="rhs_45Rnd_545X39_7N10_AK";
-									ammoLeft=45;
-								};
-								class secondaryMuzzleMag
-								{
-									name="rhs_VOG25";
-									ammoLeft=1;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_grn_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=5;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_VOG25";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item2
-									{
-										name="rhs_VG40MD";
-										count=3;
-										ammoLeft=1;
-									};
-									class Item3
-									{
-										name="rhs_VG40OP_red";
-										count=2;
-										ammoLeft=1;
-									};
-									class Item4
-									{
-										name="rhs_45Rnd_545X39_7N10_AK";
-										count=5;
-										ammoLeft=45;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_grenadier_pack";
-								isBackpack=1;
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NO";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=480;
 					type="rhs_vdv_des_grenadier";
@@ -5156,114 +3801,6 @@ class Mission
 						init="this setGroupid [""Bravo""]";
 						name="d_bravo_3";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="rhs_weap_ak74mr_gp25";
-								optics="rhs_acc_1p87";
-								muzzle="rhs_acc_dtk2";
-								flashlight="rhs_acc_2dpZenit_ris";
-								class primaryMuzzleMag
-								{
-									name="rhs_45Rnd_545X39_7N10_AK";
-									ammoLeft=45;
-								};
-								class secondaryMuzzleMag
-								{
-									name="rhs_VOG25";
-									ammoLeft=1;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_grn_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=5;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_VOG25";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item2
-									{
-										name="rhs_VG40MD";
-										count=3;
-										ammoLeft=1;
-									};
-									class Item3
-									{
-										name="rhs_VG40OP_red";
-										count=2;
-										ammoLeft=1;
-									};
-									class Item4
-									{
-										name="rhs_45Rnd_545X39_7N10_AK";
-										count=5;
-										ammoLeft=45;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_grenadier_pack";
-								isBackpack=1;
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NO";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=482;
 					type="rhs_vdv_des_grenadier";
@@ -5532,107 +4069,6 @@ class Mission
 						name="d_bravo_8";
 						description="Диверсант";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="rhs_weap_asval";
-								optics="rhs_acc_1p63";
-								class primaryMuzzleMag
-								{
-									name="rhs_20rnd_9x39mm_SP6";
-									ammoLeft=20;
-								};
-							};
-							class handgun
-							{
-								name="rhs_weap_pya";
-								class primaryMuzzleMag
-								{
-									name="rhs_mag_9x19_17";
-									ammoLeft=17;
-								};
-							};
-							class uniform
-							{
-								typeName="G3_RUSSIA_ATACS_FG";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="rhs_20rnd_9x39mm_SP6";
-										count=3;
-										ammoLeft=20;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_EMR";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=6;
-									class Item0
-									{
-										name="rhs_20rnd_9x39mm_SP6";
-										count=4;
-										ammoLeft=20;
-									};
-									class Item1
-									{
-										name="rhs_mag_9x19_17";
-										count=1;
-										ammoLeft=17;
-									};
-									class Item2
-									{
-										name="rhs_mag_rgn";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item3
-									{
-										name="rhs_mag_fakel";
-										count=2;
-										ammoLeft=1;
-									};
-									class Item4
-									{
-										name="rhs_mag_rdg2_white";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item5
-									{
-										name="rhs_mag_nspd";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_recon_rifleman_pack";
-								isBackpack=1;
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="FaceWear_Balaclava";
-							hmd="CL_armbands_NO";
-							headgear="rhs_6b47_6m2_1";
-						};
 					};
 					id=900;
 					type="rhs_vdv_recon_rifleman_asval";
@@ -5712,90 +4148,6 @@ class Mission
 						name="d_charlie_2";
 						description="Снайпер";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="rhs_weap_t5000";
-								optics="rhs_acc_dh520x56";
-								underBarrel="rhs_acc_harris_swivel";
-								class primaryMuzzleMag
-								{
-									name="rhs_5Rnd_338lapua_t5000";
-									ammoLeft=5;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_mg_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_5Rnd_338lapua_t5000";
-										count=29;
-										ammoLeft=5;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_marksman_pack";
-								isBackpack=1;
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NW";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=453;
 					type="rhs_vdv_des_marksman";
@@ -5860,92 +4212,6 @@ class Mission
 						init="this setGroupid [""Charlie""]";
 						name="d_charlie_5";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="bcb_weap_ak74m_zenitco01_tan2_spray";
-								optics="rhs_acc_1p63";
-								muzzle="rhs_acc_ak5";
-								flashlight="rhs_acc_2dpZenit_ris";
-								underBarrel="rhsusf_acc_kac_grip";
-								class primaryMuzzleMag
-								{
-									name="rhs_30Rnd_545x39_7N10_plum_AK";
-									ammoLeft=30;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_30Rnd_545x39_7N10_plum_AK";
-										count=10;
-										ammoLeft=30;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_rifleman_pack";
-								isBackpack=1;
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NW";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=455;
 					type="rhs_vdv_des_rifleman";
@@ -6010,98 +4276,6 @@ class Mission
 						init="this setGroupid [""Charlie""]";
 						name="d_charlie_6";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="bcb_weap_ak74m_zenitco01_tan2_spray";
-								optics="rhs_acc_1p63";
-								muzzle="rhs_acc_ak5";
-								flashlight="rhs_acc_2dpZenit_ris";
-								underBarrel="rhsusf_acc_kac_grip";
-								class primaryMuzzleMag
-								{
-									name="rhs_30Rnd_545x39_7N10_plum_AK";
-									ammoLeft=30;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=5;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="Medikit";
-										count=1;
-									};
-									class Item1
-									{
-										name="FirstAidKit";
-										count=7;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_medic_pack";
-								isBackpack=1;
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="Medikit";
-										count=1;
-									};
-									class Item1
-									{
-										name="FirstAidKit";
-										count=2;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NW";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=456;
 					type="rhs_vdv_des_medic";
@@ -6166,98 +4340,6 @@ class Mission
 						init="this setGroupid [""Charlie""]";
 						name="d_charlie_7";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="rhs_weap_pkp";
-								class primaryMuzzleMag
-								{
-									name="150Rnd_762x54_Box_Tracer";
-									ammoLeft=150;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_mg_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="150Rnd_762x54_Box_Tracer";
-										count=2;
-										ammoLeft=150;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_machinegunner_pack";
-								isBackpack=1;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="150Rnd_762x54_Box_Tracer";
-										count=4;
-										ammoLeft=150;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NW";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=457;
 					type="rhs_vdv_des_machinegunner";
@@ -6322,111 +4404,6 @@ class Mission
 						init="this setGroupid [""Charlie""]";
 						name="d_charlie_8";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="bcb_weap_ak74m_zenitco01_tan2_spray";
-								optics="rhs_acc_1p63";
-								muzzle="rhs_acc_ak5";
-								flashlight="rhs_acc_2dpZenit_ris";
-								underBarrel="rhsusf_acc_kac_grip";
-								class primaryMuzzleMag
-								{
-									name="rhs_30Rnd_545x39_7N10_plum_AK";
-									ammoLeft=30;
-								};
-							};
-							class secondaryWeapon
-							{
-								name="FP_Aegis_launch_RPG7M_F";
-								class primaryMuzzleMag
-								{
-									name="RPG7_F";
-									ammoLeft=1;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_30Rnd_545x39_7N10_plum_AK";
-										count=10;
-										ammoLeft=30;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_grenadier_rpg_pack";
-								isBackpack=1;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="RPG7_F";
-										count=3;
-										ammoLeft=1;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NW";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=901;
 					type="rhs_vdv_des_grenadier_rpg";
@@ -6491,111 +4468,6 @@ class Mission
 						init="this setGroupid [""Charlie""]";
 						name="d_charlie_3";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="bcb_weap_ak105_zenitco01_tan2_spray";
-								optics="rhs_acc_1p63";
-								muzzle="rhs_acc_dtk2";
-								flashlight="rhs_acc_2dpZenit_ris";
-								underBarrel="rhsusf_acc_kac_grip";
-								class primaryMuzzleMag
-								{
-									name="rhs_30Rnd_545x39_7N10_plum_AK";
-									ammoLeft=30;
-								};
-							};
-							class secondaryWeapon
-							{
-								name="FP_Verba_9k333";
-								class primaryMuzzleMag
-								{
-									name="9m336";
-									ammoLeft=1;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_30Rnd_545x39_7N10_plum_AK";
-										count=10;
-										ammoLeft=30;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_aa_pack";
-								isBackpack=1;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="9m336";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NW";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=902;
 					type="rhs_vdv_des_aa";
@@ -6838,119 +4710,6 @@ class Mission
 						init="this setGroupid [""Charlie""]";
 						name="d_charlie_4";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="rhs_weap_ak74mr_gp25";
-								optics="rhsusf_acc_eotech_552";
-								muzzle="Silencer_Hybrid_46";
-								flashlight="rhsusf_acc_anpeq15_bk_top";
-								class primaryMuzzleMag
-								{
-									name="rhs_30Rnd_545x39_7N22_plum_AK";
-									ammoLeft=30;
-								};
-								class secondaryMuzzleMag
-								{
-									name="rhs_VOG25";
-									ammoLeft=1;
-								};
-							};
-							class secondaryWeapon
-							{
-								name="FP_rhs_weap_rshg2";
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								muzzle="muzzle_snds_L";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="G3_RUSSIA_ATACS_FG";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=3;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item2
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_grn_EMR";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=4;
-									class Item0
-									{
-										name="rhs_30Rnd_545x39_7N22_plum_AK";
-										count=9;
-										ammoLeft=30;
-									};
-									class Item1
-									{
-										name="rhs_VOG25";
-										count=2;
-										ammoLeft=1;
-									};
-									class Item2
-									{
-										name="rhs_VG40MD";
-										count=3;
-										ammoLeft=1;
-									};
-									class Item3
-									{
-										name="rhs_VG40OP_red";
-										count=3;
-										ammoLeft=1;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_recon_grenadier_pack";
-								isBackpack=1;
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="FaceWear_Balaclava";
-							hmd="CL_armbands_NW";
-							headgear="rhs_6b47_6m2_1";
-						};
 					};
 					id=949;
 					type="rhs_vdv_recon_grenadier";
@@ -7024,7 +4783,6 @@ class Mission
 								name="rhs_weap_akm_zenitco01_b33";
 								optics="rhs_acc_dh520x56";
 								muzzle="rhs_acc_pbs1";
-								flashlight="JAS_ANPEQ15_Blk";
 								underBarrel="rhs_acc_grip_ffg2";
 								class primaryMuzzleMag
 								{
@@ -7062,11 +4820,11 @@ class Mission
 							};
 							class vest
 							{
-								typeName="rhs_6b23_digi_rifleman";
+								typeName="min_rf_armor_vest_flora";
 								isBackpack=0;
 								class MagazineCargo
 								{
-									items=3;
+									items=4;
 									class Item0
 									{
 										name="rhs_mag_rgd5";
@@ -7076,20 +4834,26 @@ class Mission
 									class Item1
 									{
 										name="75Rnd_762x39_Mag_Tracer_F";
-										count=1;
+										count=2;
 										ammoLeft=75;
 									};
 									class Item2
 									{
 										name="75Rnd_762x39_Mag_F";
-										count=1;
+										count=2;
 										ammoLeft=75;
+									};
+									class Item3
+									{
+										name="rhs_mag_f1";
+										count=2;
+										ammoLeft=1;
 									};
 								};
 							};
 							class backpack
 							{
-								typeName="rhs_tortila_olive";
+								typeName="min_rf_backpack_flora";
 								isBackpack=1;
 								class MagazineCargo
 								{
@@ -7109,7 +4873,7 @@ class Mission
 									class Item2
 									{
 										name="rhs_ec400_mag";
-										count=2;
+										count=4;
 										ammoLeft=1;
 									};
 									class Item3
@@ -7139,8 +4903,6 @@ class Mission
 							compass="ItemCompass";
 							watch="ItemWatch";
 							radio="ItemRadio";
-							goggles="FaceWear_Bandana_Skull_Shades_Green";
-							hmd="CL_armbands_NW";
 							headgear="rhs_6b27m_digi_ess";
 						};
 					};
@@ -7207,130 +4969,6 @@ class Mission
 						init="this setGroupid [""Delta""]";
 						name="d_delta_2";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="bcb_weap_ak74m_zenitco01_tan2_spray";
-								optics="rhs_acc_1p63";
-								muzzle="rhs_acc_dtk2";
-								flashlight="rhs_acc_2dpZenit_ris";
-								underBarrel="rhsusf_acc_kac_grip";
-								class primaryMuzzleMag
-								{
-									name="rhs_45Rnd_545X39_7N10_AK";
-									ammoLeft=45;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_45Rnd_545X39_7N10_AK";
-										count=2;
-										ammoLeft=45;
-									};
-								};
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="ToolKit";
-										count=1;
-									};
-									class Item1
-									{
-										name="MineDetector";
-										count=1;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_engineer_pack";
-								isBackpack=1;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="rhs_45Rnd_545X39_7N10_AK";
-										count=1;
-										ammoLeft=45;
-									};
-								};
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="ToolKit";
-										count=1;
-									};
-									class Item1
-									{
-										name="MineDetector";
-										count=1;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NO";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=461;
 					type="rhs_vdv_des_engineer";
@@ -7395,130 +5033,6 @@ class Mission
 						init="this setGroupid [""Delta""]";
 						name="d_delta_4";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="bcb_weap_ak74m_zenitco01_tan2_spray";
-								optics="rhs_acc_1p63";
-								muzzle="rhs_acc_dtk2";
-								flashlight="rhs_acc_2dpZenit_ris";
-								underBarrel="rhsusf_acc_kac_grip";
-								class primaryMuzzleMag
-								{
-									name="rhs_45Rnd_545X39_7N10_AK";
-									ammoLeft=45;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_45Rnd_545X39_7N10_AK";
-										count=2;
-										ammoLeft=45;
-									};
-								};
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="ToolKit";
-										count=1;
-									};
-									class Item1
-									{
-										name="MineDetector";
-										count=1;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_engineer_pack";
-								isBackpack=1;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="rhs_45Rnd_545X39_7N10_AK";
-										count=1;
-										ammoLeft=45;
-									};
-								};
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="ToolKit";
-										count=1;
-									};
-									class Item1
-									{
-										name="MineDetector";
-										count=1;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NW";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=462;
 					type="rhs_vdv_des_engineer";
@@ -7570,130 +5084,6 @@ class Mission
 						init="this setGroupid [""Delta""]";
 						name="d_delta_3";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="bcb_weap_ak74m_zenitco01_tan2_spray";
-								optics="rhs_acc_1p63";
-								muzzle="rhs_acc_dtk2";
-								flashlight="rhs_acc_2dpZenit_ris";
-								underBarrel="rhsusf_acc_kac_grip";
-								class primaryMuzzleMag
-								{
-									name="rhs_45Rnd_545X39_7N10_AK";
-									ammoLeft=45;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_45Rnd_545X39_7N10_AK";
-										count=2;
-										ammoLeft=45;
-									};
-								};
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="ToolKit";
-										count=1;
-									};
-									class Item1
-									{
-										name="MineDetector";
-										count=1;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_engineer_pack";
-								isBackpack=1;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="rhs_45Rnd_545X39_7N10_AK";
-										count=1;
-										ammoLeft=45;
-									};
-								};
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="ToolKit";
-										count=1;
-									};
-									class Item1
-									{
-										name="MineDetector";
-										count=1;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NW";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=463;
 					type="rhs_vdv_des_engineer";
@@ -7758,130 +5148,6 @@ class Mission
 						init="this setGroupid [""Delta""]";
 						name="d_delta_6";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="bcb_weap_ak74m_zenitco01_tan2_spray";
-								optics="rhs_acc_1p63";
-								muzzle="rhs_acc_dtk2";
-								flashlight="rhs_acc_2dpZenit_ris";
-								underBarrel="rhsusf_acc_kac_grip";
-								class primaryMuzzleMag
-								{
-									name="rhs_45Rnd_545X39_7N10_AK";
-									ammoLeft=45;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_45Rnd_545X39_7N10_AK";
-										count=2;
-										ammoLeft=45;
-									};
-								};
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="ToolKit";
-										count=1;
-									};
-									class Item1
-									{
-										name="MineDetector";
-										count=1;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_engineer_pack";
-								isBackpack=1;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="rhs_45Rnd_545X39_7N10_AK";
-										count=1;
-										ammoLeft=45;
-									};
-								};
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="ToolKit";
-										count=1;
-									};
-									class Item1
-									{
-										name="MineDetector";
-										count=1;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NO";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=465;
 					type="rhs_vdv_des_engineer";
@@ -7933,120 +5199,6 @@ class Mission
 						init="this setGroupid [""Delta""]";
 						name="d_delta_5";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="AK74M_B30_B31C_CTR_RVG_camo";
-								optics="rhs_acc_1p87";
-								muzzle="Silencer_Hybrid_46_camo";
-								flashlight="JAS_M720VPEQ_AK_B30_B31C_TOP_Blk";
-								class primaryMuzzleMag
-								{
-									name="rhs_45Rnd_545X39_7N22_AK";
-									ammoLeft=45;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								muzzle="muzzle_snds_L";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_SPEC_B";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_EMR";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_45Rnd_545X39_7N22_AK";
-										count=2;
-										ammoLeft=45;
-									};
-								};
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="ToolKit";
-										count=1;
-									};
-									class Item1
-									{
-										name="MineDetector";
-										count=1;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_mflora_engineer_pack";
-								isBackpack=1;
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="ToolKit";
-										count=1;
-									};
-									class Item1
-									{
-										name="MineDetector";
-										count=1;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="rhs_scarf";
-							hmd="CL_armbands_NO";
-							headgear="FAST_COVER_SPEC_B";
-						};
 					};
 					id=1000;
 					type="rhs_vdv_mflora_engineer";
@@ -8307,90 +5459,6 @@ class Mission
 						name="d_echo_2";
 						description="Снайпер";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="rhs_weap_t5000";
-								optics="rhs_acc_dh520x56";
-								underBarrel="rhs_acc_harris_swivel";
-								class primaryMuzzleMag
-								{
-									name="rhs_5Rnd_338lapua_t5000";
-									ammoLeft=5;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_mg_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_5Rnd_338lapua_t5000";
-										count=29;
-										ammoLeft=5;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_marksman_pack";
-								isBackpack=1;
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NO";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=467;
 					type="rhs_vdv_des_marksman";
@@ -8456,111 +5524,6 @@ class Mission
 						name="d_echo_4";
 						description="Гранатомётчик";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="bcb_weap_ak105_zenitco01_tan2_spray";
-								optics="rhs_acc_1p63";
-								muzzle="rhs_acc_ak5";
-								flashlight="rhs_acc_2dpZenit_ris";
-								underBarrel="rhsusf_acc_kac_grip";
-								class primaryMuzzleMag
-								{
-									name="rhs_30Rnd_545x39_7N10_plum_AK";
-									ammoLeft=30;
-								};
-							};
-							class secondaryWeapon
-							{
-								name="FP_launch_O_Vorona_green_F";
-								class primaryMuzzleMag
-								{
-									name="Vorona_HEAT";
-									ammoLeft=1;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_30Rnd_545x39_7N10_plum_AK";
-										count=10;
-										ammoLeft=30;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_at_pack";
-								isBackpack=1;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="Vorona_HEAT";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="rhs_scarf";
-							hmd="CL_armbands_NO";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=468;
 					type="rhs_vdv_des_at";
@@ -8625,92 +5588,6 @@ class Mission
 						init="this setGroupid [""Echo""]";
 						name="d_echo_5";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="bcb_weap_ak74m_zenitco01_tan2_spray";
-								optics="rhs_acc_1p63";
-								muzzle="rhs_acc_ak5";
-								flashlight="rhs_acc_2dpZenit_ris";
-								underBarrel="rhsusf_acc_kac_grip";
-								class primaryMuzzleMag
-								{
-									name="rhs_30Rnd_545x39_7N10_plum_AK";
-									ammoLeft=30;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_30Rnd_545x39_7N10_plum_AK";
-										count=10;
-										ammoLeft=30;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_rifleman_pack";
-								isBackpack=1;
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NO";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=469;
 					type="rhs_vdv_des_rifleman";
@@ -8775,98 +5652,6 @@ class Mission
 						init="this setGroupid [""Echo""]";
 						name="d_echo_6";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="bcb_weap_ak74m_zenitco01_tan2_spray";
-								optics="rhs_acc_1p63";
-								muzzle="rhs_acc_ak5";
-								flashlight="rhs_acc_2dpZenit_ris";
-								underBarrel="rhsusf_acc_kac_grip";
-								class primaryMuzzleMag
-								{
-									name="rhs_30Rnd_545x39_7N10_plum_AK";
-									ammoLeft=30;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=5;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="Medikit";
-										count=1;
-									};
-									class Item1
-									{
-										name="FirstAidKit";
-										count=7;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_medic_pack";
-								isBackpack=1;
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="Medikit";
-										count=1;
-									};
-									class Item1
-									{
-										name="FirstAidKit";
-										count=2;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NO";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=470;
 					type="rhs_vdv_des_medic";
@@ -8931,98 +5716,6 @@ class Mission
 						init="this setGroupid [""Echo""]";
 						name="d_echo_7";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="bcb_weap_ak74m_zenitco01_tan2_spray";
-								optics="rhs_acc_1p63";
-								muzzle="rhs_acc_ak5";
-								flashlight="rhs_acc_2dpZenit_ris";
-								underBarrel="rhsusf_acc_kac_grip";
-								class primaryMuzzleMag
-								{
-									name="rhs_30Rnd_545x39_7N10_plum_AK";
-									ammoLeft=30;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=5;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="Medikit";
-										count=1;
-									};
-									class Item1
-									{
-										name="FirstAidKit";
-										count=7;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_medic_pack";
-								isBackpack=1;
-								class ItemCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="Medikit";
-										count=1;
-									};
-									class Item1
-									{
-										name="FirstAidKit";
-										count=2;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NO";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=471;
 					type="rhs_vdv_des_medic";
@@ -9074,111 +5767,6 @@ class Mission
 						init="this setGroupid [""Echo""]";
 						name="d_echo_8";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="bcb_weap_ak74m_zenitco01_tan2_spray";
-								optics="rhs_acc_1p63";
-								muzzle="rhs_acc_ak5";
-								flashlight="rhs_acc_2dpZenit_ris";
-								underBarrel="rhsusf_acc_kac_grip";
-								class primaryMuzzleMag
-								{
-									name="rhs_30Rnd_545x39_7N10_plum_AK";
-									ammoLeft=30;
-								};
-							};
-							class secondaryWeapon
-							{
-								name="FP_Aegis_launch_RPG7M_F";
-								class primaryMuzzleMag
-								{
-									name="RPG7_F";
-									ammoLeft=1;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_rifleman_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="rhs_30Rnd_545x39_7N10_plum_AK";
-										count=10;
-										ammoLeft=30;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_grenadier_rpg_pack";
-								isBackpack=1;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="RPG7_F";
-										count=3;
-										ammoLeft=1;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NO";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=903;
 					type="rhs_vdv_des_grenadier_rpg";
@@ -9232,8 +5820,8 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={14482.6,18.8727,16317.2};
-						angles[]={6.2818899,2.5234699,0};
+						position[]={14482.6,18.872639,16317.2};
+						angles[]={6.2818937,2.5234668,0};
 					};
 					side="East";
 					flags=4;
@@ -9243,102 +5831,10 @@ class Mission
 						init="this setGroupid [""Echo""]";
 						name="d_echo_3";
 						isPlayable=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="rhs_weap_pkp";
-								class primaryMuzzleMag
-								{
-									name="150Rnd_762x54_Box_Tracer";
-									ammoLeft=150;
-								};
-							};
-							class handgun
-							{
-								name="hgun_Rook40_F";
-								class primaryMuzzleMag
-								{
-									name="16Rnd_9x21_Mag";
-									ammoLeft=16;
-								};
-							};
-							class uniform
-							{
-								typeName="6sh122_RUSSIA_ATACS_AU_V2";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="HandGrenade";
-										count=1;
-										ammoLeft=1;
-									};
-									class Item1
-									{
-										name="SmokeShell";
-										count=1;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=3;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhs_6b45_mg_WAGNER_AU";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="16Rnd_9x21_Mag";
-										count=2;
-										ammoLeft=16;
-									};
-									class Item1
-									{
-										name="150Rnd_762x54_Box_Tracer";
-										count=2;
-										ammoLeft=150;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhs_vdv_des_arifleman_pack";
-								isBackpack=1;
-								class MagazineCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="150Rnd_762x54_Box_Tracer";
-										count=4;
-										ammoLeft=150;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							goggles="G_Bandanna_khk";
-							hmd="CL_armbands_NO";
-							headgear="FP_6B47_ESS_ATAKA";
-						};
 					};
 					id=904;
 					type="rhs_vdv_des_arifleman";
-					atlOffset=0.025060654;
+					atlOffset=0.024999619;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -12131,8 +8627,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={14426.6,18.737301,16229.7};
-				angles[]={6.26719,5.5002799,6.2778602};
+				position[]={14482.437,18.400068,16259.447};
+				angles[]={6.2751846,5.5002799,6.2698536};
 			};
 			side="Empty";
 			flags=4;
@@ -12142,7 +8638,6 @@ class Mission
 			};
 			id=571;
 			type="Land_runway_edgelight_blue_F";
-			atlOffset=0.00031280518;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12166,8 +8661,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={14434.6,18.6623,16237.4};
-				angles[]={6.2818499,5.5002799,6.2631898};
+				position[]={14490.437,18.343096,16267.147};
+				angles[]={6.2711854,5.5002799,6.2685208};
 			};
 			side="Empty";
 			flags=4;
@@ -12177,7 +8672,7 @@ class Mission
 			};
 			id=572;
 			type="Land_runway_edgelight_blue_F";
-			atlOffset=0.00080871582;
+			atlOffset=9.9182129e-05;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12201,8 +8696,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={14442.4,18.563999,16229.3};
-				angles[]={6.2778602,5.5002799,6.2778602};
+				position[]={14498.237,18.146873,16259.047};
+				angles[]={6.2791886,5.5002799,6.2791886};
 			};
 			side="Empty";
 			flags=4;
@@ -12212,7 +8707,6 @@ class Mission
 			};
 			id=573;
 			type="Land_runway_edgelight_blue_F";
-			atlOffset=0.00023269653;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12236,8 +8730,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={14434.3,18.562,16221.5};
-				angles[]={6.2698498,5.5002799,6.2765298};
+				position[]={14490.137,18.176977,16251.247};
+				angles[]={6.2791886,5.5002799,6.2711854};
 			};
 			side="Empty";
 			flags=4;
@@ -12247,7 +8741,6 @@ class Mission
 			};
 			id=574;
 			type="Land_runway_edgelight_blue_F";
-			atlOffset=0.00036430359;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14461,43 +10954,6 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={14492.6,21.1686,16294.1};
-				angles[]={6.2711902,0.75437897,6.2698498};
-			};
-			side="Empty";
-			flags=4;
-			class Attributes
-			{
-				skill=0.60000002;
-				lock="UNLOCKED";
-				name="d_vec_mhq_2";
-			};
-			id=1028;
-			type="FP_Spetsnaz_Alpha_Punisher";
-			atlOffset=0.00018119812;
-			class CustomAttributes
-			{
-				class Attribute0
-				{
-					property="ammoBox";
-					expression="[_this,_value] call bis_fnc_initAmmoBox;";
-					class Value
-					{
-						class data
-						{
-							singleType="STRING";
-							value="[[[[""rhs_weap_ak103_zenitco01_b33""],[2]],[[""30Rnd_65x39_caseless_green"",""150Rnd_762x54_Box"",""HandGrenade"",""SmokeShell"",""SmokeShellRed"",""SmokeShellYellow"",""SmokeShellOrange"",""1Rnd_HE_Grenade_shell"",""1Rnd_Smoke_Grenade_shell"",""1Rnd_SmokeYellow_Grenade_shell"",""1Rnd_SmokeOrange_Grenade_shell"",""1Rnd_SmokeRed_Grenade_shell"",""16Rnd_9x21_Mag"",""RPG32_F"",""rhs_rpg7_PG7V_mag"",""rhs_rpg7_PG7VL_mag""],[16,4,10,4,4,4,4,10,4,4,4,4,12,2,2,2]],[[""FirstAidKit""],[10]],[[""O_AT_01_weapon_F"",""O_Static_Designator_02_weapon_F"",""min_rf_torna_flora_Metis_s"",""B_CombinationUnitRespirator_01_F"",""B_SCBA_01_F"",""C_IDAP_UGV_02_Demining_backpack_F""],[1,1,1,3,3,1]]],false]";
-						};
-					};
-				};
-				nAttributes=1;
-			};
-		};
-		class Item389
-		{
-			dataType="Object";
-			class PositionInfo
-			{
 				position[]={7183.5898,50.247505,15473.3};
 				angles[]={0,6.02139,0};
 			};
@@ -14511,7 +10967,7 @@ class Mission
 			type="rhs_Flag_Che_F";
 			atlOffset=0.26499557;
 		};
-		class Item390
+		class Item389
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14547,7 +11003,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item391
+		class Item390
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14566,7 +11022,7 @@ class Mission
 			type="rhs_Flag_DNR_F";
 			atlOffset=0.034034729;
 		};
-		class Item392
+		class Item391
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14602,7 +11058,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item393
+		class Item392
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14621,7 +11077,7 @@ class Mission
 			type="rhs_Flag_LNR_F";
 			atlOffset=-0.0070466995;
 		};
-		class Item394
+		class Item393
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14637,7 +11093,7 @@ class Mission
 			type="Land_BagFence_Corner_F";
 			atlOffset=13.042202;
 		};
-		class Item395
+		class Item394
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14653,7 +11109,7 @@ class Mission
 			type="Land_BagFence_Long_F";
 			atlOffset=12.652588;
 		};
-		class Item396
+		class Item395
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14669,13 +11125,13 @@ class Mission
 			type="Land_BagFence_Long_F";
 			atlOffset=12.648954;
 		};
-		class Item397
+		class Item396
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={14481.3,19.879801,16310};
-				angles[]={6.2818899,0.73192102,0};
+				position[]={14481.3,19.879831,16309.999};
+				angles[]={6.2818937,0.73192126,0};
 			};
 			side="Empty";
 			flags=4;
@@ -14687,7 +11143,7 @@ class Mission
 			};
 			id=1065;
 			type="Land_TripodScreen_01_large_black_F";
-			atlOffset=-3.4332275e-05;
+			atlOffset=-1.9073486e-06;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14719,7 +11175,7 @@ class Mission
 				nAttributes=2;
 			};
 		};
-		class Item398
+		class Item397
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14735,7 +11191,7 @@ class Mission
 			type="Land_HBarrier_Big_F";
 			atlOffset=1.8097477;
 		};
-		class Item399
+		class Item398
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14751,7 +11207,7 @@ class Mission
 			type="Land_HBarrier_Big_F";
 			atlOffset=2.0568314;
 		};
-		class Item400
+		class Item399
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14767,7 +11223,7 @@ class Mission
 			type="Land_HBarrier_Big_F";
 			atlOffset=1.033308;
 		};
-		class Item401
+		class Item400
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14783,7 +11239,7 @@ class Mission
 			type="Land_HBarrier_Big_F";
 			atlOffset=1.915432;
 		};
-		class Item402
+		class Item401
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14799,7 +11255,7 @@ class Mission
 			type="Land_HBarrier_Big_F";
 			atlOffset=1.9123993;
 		};
-		class Item403
+		class Item402
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14815,7 +11271,7 @@ class Mission
 			type="Land_HBarrier_Big_F";
 			atlOffset=2.1421432;
 		};
-		class Item404
+		class Item403
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14831,7 +11287,7 @@ class Mission
 			type="Land_HBarrier_Big_F";
 			atlOffset=2.007967;
 		};
-		class Item405
+		class Item404
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14843,6 +11299,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
+				init="this addAction [ " \n "    ""<t color='#FF0000'>[Магазин техники]</t>"",  " \n "    { " \n "        if (isNil ""vehicleShop_vehicles"") then { " \n "            systemChat ""Данные загружаются...""; " \n "            [] spawn { " \n "                waitUntil {!isNil ""vehicleShop_vehicles""}; " \n "                createDialog ""VehicleShopDialog""; " \n "                [] call vehicleShop_updateUI; " \n "            }; " \n "        } else { " \n "            createDialog ""VehicleShopDialog""; " \n "            [] call vehicleShop_updateUI; " \n "        }; " \n "    }, " \n "    nil, 1.5, true, true, """", " \n "    ""playerSide == east && (player distance _target) < 3"", 5 " \n "];";
 				name="stand1";
 				disableSimulation=1;
 			};
@@ -14880,7 +11337,7 @@ class Mission
 				nAttributes=2;
 			};
 		};
-		class Item406
+		class Item405
 		{
 			dataType="Marker";
 			position[]={14550.8,17.888901,16247.5};
@@ -14890,7 +11347,7 @@ class Mission
 			id=1074;
 			atlOffset=-3.2424927e-05;
 		};
-		class Item407
+		class Item406
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14927,7 +11384,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item408
+		class Item407
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14964,7 +11421,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item409
+		class Item408
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -14993,7 +11450,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item410
+		class Item409
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -15022,7 +11479,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item411
+		class Item410
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -15051,7 +11508,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item412
+		class Item411
 		{
 			dataType="Object";
 			class PositionInfo
@@ -15086,7 +11543,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item413
+		class Item412
 		{
 			dataType="Object";
 			class PositionInfo
@@ -15105,6 +11562,123 @@ class Mission
 			id=1092;
 			type="O_Quadbike_01_F";
 			atlOffset=-6.8664551e-05;
+		};
+		class Item413
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={14500.479,18.802231,16335.702};
+				angles[]={0.0026520467,1.41372,6.2778587};
+			};
+			id=1125;
+			type="ModuleChemlight_F";
+			atlOffset=-5.7220459e-06;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ModuleChemlight_F_Type";
+					expression="_this setVariable ['Type',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="STRING";
+							value="Chemlight_Yellow";
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item414
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={14486.536,21.541904,16293.657};
+				angles[]={6.2711778,0.72883201,0.0013439035};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				name="d_vec_mhq_2";
+			};
+			id=1127;
+			type="O_MRAP_02_hmg_F";
+			atlOffset=-0.00029945374;
+		};
+		class Item415
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={14478.884,19.630756,16318.146};
+				angles[]={0,0.81241584,6.281981};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				disableSimulation=1;
+			};
+			id=1128;
+			type="OfficeTable_01_new_F";
+			atlOffset=0.00011062622;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item416
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={14479.1,20.182453,16318.018};
+				angles[]={0,3.6775658,6.281981};
+			};
+			side="Empty";
+			class Attributes
+			{
+				name="bank";
+				disableSimulation=1;
+			};
+			id=1131;
+			type="Land_Laptop_02_unfolded_F";
+			atlOffset=0.8449192;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 	};
 };
