@@ -12,15 +12,10 @@ allowFunctionsLog = 1;
 #endif
 #include "cfgfunctions.hpp"
 
-arsenalRestrictedItems[] = {"launch_min_rf_titan_short","launch_MRAWS_green_rail_F","launch_MRAWS_green_F","launch_MRAWS_olive_rail_F","launch_MRAWS_olive_F","launch_MRAWS_sand_rail_F","launch_MRAWS_sand_F","launch_MRAWS_black_F","launch_MRAWS_black_rail_F","launch_MRAWS_coyote_rail_F","rhs_weap_maaws","rhs_weap_fgm148","launch_O_Vorona_green_F","launch_O_Vorona_brown_F"};
-
-#include "Rsc\Resources.hpp"
-#include "Rsc\Dialogs.hpp"
-#include "scripts\vehicleShop\vehicleShop_dialog.hpp"
 
 author = "Xeno/ред. Pirat";
 AZM_ADMINS_LIST[] = {"15a39336321839606a91bfd17de038bc"};
-OnLoadName = "Доминация 4!";
+OnLoadName = "Доминация 4М!";
 onLoadMission = "$STR_DOM_MISSIONSTRING_24";
 onLoadIntroTime = false;
 onLoadMissionTime = false;
@@ -34,6 +29,41 @@ saving = 0;
 loadScreen = "pics\domls.paa";
 overviewText = "$STR_DOM_MISSIONSTRING_1828";
 overrideHazeQuality = 1; // Very Low   0/1/2 - VeryLow/Low/Standard
+
+// Обязательные аддоны
+class CfgPatches {
+    class Domination_vehicleShop {
+        units[] = {};
+        weapons[] = {};
+        requiredVersion = 1.0;
+        requiredAddons[] = {
+            "A3_UI_F",
+            "A3_Data_F",
+            "cba_main",  // Добавлен CBA
+            "cba_xeh"    // Для расширенных обработчиков событий
+        };
+    };
+};
+
+// Настройки CBA
+class CfgSettings {
+    class CBA {
+        class Versioning {
+            class Domination {
+                main_addon = "Domination_vehicleShop";
+                class Dependencies {
+                    CBA[] = {"cba_main", {3,15,0}, "(true)"};
+                };
+            };
+        };
+    };
+};
+
+// Подключение ресурсов (ВАЖНЫЙ ПОРЯДОК!)
+#include "Rsc\Resources.hpp"
+#include "Rsc\Dialogs.hpp"
+#include "scripts\vehicleShop\vehicleShop_dialog.hpp"
+//#include "scripts\bank\bank_dialog.hpp"
 
 class CfgWorlds {
 	class Any {
@@ -52,6 +82,8 @@ class CfgWorlds {
 };
 
 //enableDebugConsole = 1;
+
+arsenalRestrictedItems[] = {"launch_min_rf_titan_short","launch_MRAWS_green_rail_F","launch_MRAWS_green_F","launch_MRAWS_olive_rail_F","launch_MRAWS_olive_F","launch_MRAWS_sand_rail_F","launch_MRAWS_sand_F","launch_MRAWS_black_F","launch_MRAWS_black_rail_F","launch_MRAWS_coyote_rail_F","rhs_weap_maaws","rhs_weap_fgm148","launch_O_Vorona_green_F","launch_O_Vorona_brown_F"};
 
 class Header {
 #ifndef __TT__
@@ -180,9 +212,9 @@ class CfgRemoteExec {
 		// 1 - включен с учетом белого списка
 		// 2 - включен, однако, без учета белых списков (по умолчанию из-за обратной совместимости)
 		mode = 1;
-		// jip - Join In Progress settings
-		// 0 - JIP flag can not be set
-		// 1 - JIP flag can be set (default
+		// jip - Регистрация в процессе настройки
+		// 0 - Флаг JIP не может быть установлен
+		// 1 - Флаг JIP может быть установлен (по умолчанию
 		jip = 0;
 		//your functions here
 		//class YourFunction1 {
@@ -328,6 +360,11 @@ class CfgRemoteExec {
 		class d_fnc_showmtbest {allowedTargets = 1;};
 		class d_fnc_selectleader {allowedTargets = 2;};
 		class d_fnc_acurator {allowedTargets = 2;};
+		class vehicleShop_serverPurchase { allowedTargets = 2; };
+        class vehicleShop_setLoadMode { allowedTargets = 2; };
+        class vehicleShop_updateUI { allowedTargets = 0; };
+        class vehicleShop_updateDetails { allowedTargets = 0; };
+        class vehicleShop_getPlayerRank { allowedTargets = 0; };
 #ifdef __TT__
 		class d_fnc_plcheckkillblufor {allowedTargets = 2;};
 		class d_fnc_plcheckkillopfor {allowedTargets = 2;};
@@ -380,7 +417,7 @@ class CfgRemoteExec {
 		mode = 1;
 		jip = 0;
 		//your commands here
-		//class YourCommand1 { allowedTargets=0; jip=0; } // can target anyone, sending jip is turned off (overrides settings in the Commands class)
+		//класс YourCommand1 { allowedTargets=0; jip=0; } // может быть нацелен на кого угодно, отправка jip отключена (переопределяет настройки в классе Commands)
 		class setFuel {};
 		class lock {};
 		class selectLeader {};
@@ -3083,4 +3120,5 @@ class Extended_Init_Eventhandlers {
 };
 
 //__EXEC(diag_log [diag_frameno, diag_ticktime, time, "Dom description.ext processed"]);
+
 enableDebugConsole = 1; // Для доступа к командам в мультиплеере
