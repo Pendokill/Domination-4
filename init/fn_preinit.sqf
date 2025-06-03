@@ -1263,7 +1263,7 @@ if (!d_pracs) then {
 #endif
 #ifdef __RHS__
 	d_sabotage_E = [["rhs_vmf_recon_rifleman_scout_akm", "rhs_vmf_recon_sergeant"]];
-	d_sabotage_W = [["FP_UAF_AssaultBatallion_Rifleman_F2000", "FP_UAF_AssaultBatallion_Rifleman_M4", "FP_UAF_Rifleman_LAT_RPG30", "rhsusf_socom_marsoc_cso"]];
+	d_sabotage_W = [["rhsusf_socom_marsoc_cso_breacher","FP_UAF_AssaultBatallion_Rifleman_F2000", "FP_UAF_AssaultBatallion_Rifleman_M4", "FP_UAF_Rifleman_AT", "rhsusf_socom_marsoc_cso", "rhsusf_army_ucp_fso", "rhsusf_army_ucp_explosives", "rhsusf_army_ucp_jfo", "rhsusf_army_ucp_uav"]];
 	d_sabotage_G = [["CUP_I_GUE_Saboteur"]];
 #endif
 #ifdef __GMCWG__

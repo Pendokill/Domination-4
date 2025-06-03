@@ -13,7 +13,7 @@ allowFunctionsLog = 1;
 #include "cfgfunctions.hpp"
 
 
-author = "Xeno/ред. Pirat";
+author = "Xeno/edit Pirat";
 AZM_ADMINS_LIST[] = {"15a39336321839606a91bfd17de038bc"};
 OnLoadName = "Доминация 4М!";
 onLoadMission = "$STR_DOM_MISSIONSTRING_24";
@@ -59,11 +59,30 @@ class CfgSettings {
     };
 };
 
-// Подключение ресурсов (ВАЖНЫЙ ПОРЯДОК!)
-#include "Rsc\Resources.hpp"
-#include "Rsc\Dialogs.hpp"
-#include "scripts\vehicleShop\vehicleShop_dialog.hpp"
-//#include "scripts\bank\bank_dialog.hpp"
+// ====================== БАНКОВСКАЯ СИСТЕМА ======================
+class CfgVehicles {
+    class Land_ATM_01_malden_F {
+        class EventHandlers {
+            init = "if ((_this select 0) getVariable ['bank_laptop', false]) then { (_this select 0) addAction ['<t color=""#00FF00"">[Банковская система]</t>', { createDialog 'BankDialog'; [] call bank_fnc_updateDialog; }, nil, 1.5, true, true, '', 'player distance _target < 3', 5]; }";
+        };
+    };
+};
+
+class CfgFunctions {
+    class Bank {
+        tag = "bank";
+        class Core {
+            file = "bank";
+            class init { preInit = 1; };
+            class takeLoan {};
+            class payLoan {};
+            class updateDialog {};
+            class takeLoanServer {};
+            class payLoanServer {};
+            class updateScore {};
+        };
+    };
+};
 
 class CfgWorlds {
 	class Any {
@@ -215,7 +234,7 @@ class CfgRemoteExec {
 		// jip - Регистрация в процессе настройки
 		// 0 - Флаг JIP не может быть установлен
 		// 1 - Флаг JIP может быть установлен (по умолчанию
-		jip = 0;
+		jip = 1;
 		//your functions here
 		//class YourFunction1 {
 			  //allowedTargets=0; // can target anyone (default)
@@ -362,9 +381,32 @@ class CfgRemoteExec {
 		class d_fnc_acurator {allowedTargets = 2;};
 		class vehicleShop_serverPurchase { allowedTargets = 2; };
         class vehicleShop_setLoadMode { allowedTargets = 2; };
+		class vehicleShop_loadVehicles { allowedTargets = 2; };
         class vehicleShop_updateUI { allowedTargets = 0; };
         class vehicleShop_updateDetails { allowedTargets = 0; };
         class vehicleShop_getPlayerRank { allowedTargets = 0; };
+		class vehicleLock_initVehicle { allowedTargets = 0; };
+		class vehicleShop_serverToggleMode { allowedTargets = 2; }; // Только сервер
+		class vehicleShop_filterByCategory { allowedTargets = 0; };
+        class vehicleLock_restoreVehicle { allowedTargets = 2; };
+		class vehicleLock_restoreVehicles { allowedTargets = 2; };
+		class vehicleShop_toggleMode { allowedTargets = 2; };
+        class vehicleShop_moveInVehicle { allowedTargets = 0; };
+        class vehicleShop_addVehicleActions { allowedTargets = 0; };
+        class vehicleShop_purchase { allowedTargets = 2; };
+		class vehicleShop_getRankName { allowedTargets = 0; };
+        class vehicleShop_checkRank { allowedTargets = 0; };
+        class vehicleShop_getModIcon { allowedTargets = 0; };
+        class vehicleShop_addDestroyedMarker { allowedTargets = 2; }; // Только сервер
+        class vehicleShop_processDestroyed { allowedTargets = 2; }; // Только сервер
+        class vehicleShop_restoreVehicle { allowedTargets = 2; }; // Только сервер
+		class bank_fnc_addScoreServer { allowedTargets = 2; }; // 2 = только сервер
+		class bank_fnc_takeLoanServer { allowedTargets = 2; }; // Только сервер
+        class bank_fnc_payLoanServer { allowedTargets = 2; }; // Только сервер
+		class bank_fnc_updateScore { allowedTargets = 2; };
+        class bank_fnc_updateDialog { allowedTargets = 0; }; // Все клиенты
+		class bank_fnc_changeScore { allowedTargets = 2; };
+        class BIS_fnc_execVM { allowedTargets = 0; }; // Необходимо для некоторых функций
 #ifdef __TT__
 		class d_fnc_plcheckkillblufor {allowedTargets = 2;};
 		class d_fnc_plcheckkillopfor {allowedTargets = 2;};
@@ -2134,6 +2176,21 @@ class Params {
 #include "dlg\PylonLoadoutDialog.hpp"
 #include "dlg\TransferScoreDialog.hpp"
 #include "dlg\AirTaxiDialog.hpp"
+#include "dlg\DialogsHelp.hpp"
+#include "scripts\bank\bank_dialog.hpp"
+#include "scripts\vehicleShop\vehicleShop_dialog.hpp"
+
+class CfgRespawnInventory {
+    class ArtilleryAI {
+        displayName = "Артиллерист";
+        icon = "\A3\ui_f\data\igui\cfg\actions\obsolete\ui_action_getin_ca.paa";
+        role = "Artillery";
+        show = "side group _this == west || side group _this == east";
+        weapons[] = {"Binocular"};
+        items[] = {};
+        variable = "ARTAI_isArtillery"; // Установит переменную автоматически
+    };
+};
 
 class CfgSounds {
 	sounds[] = {d_IncomingChallenge2};
@@ -2209,37 +2266,52 @@ class CfgSounds {
              sound[] = {\sounds\A12.ogg, db-0.5, 1.0};
              titles[] = {0, "  "};
           };
+    class veh_helicopter_damaged1 {
+        name = "veh_helicopter_damaged1";
+        sound[] = {"\sounds\veh_helicopter_damaged1.ogg", 1, 1};
+        titles[] = {};
+    };
+    class veh_helicopter_damaged2 {
+        name = "veh_helicopter_damaged2";
+        sound[] = {"\sounds\veh_helicopter_damaged2.ogg", 1, 1};
+        titles[] = {};
+    };
+	class aviaataka {
+        name = "aviaataka";
+        sound[] = {"\sounds\aviaataka.ogg", 1, 1};
+        titles[] = {};
+    };
 	class d_IncomingChallenge2 {name="d_IncomingChallenge2";sound[]={"\sounds\incoming_challenge.wss",db,1.0};titles[] = {};};
 	class d_Notebook {name="d_Notebook";sound[]={"\sounds\notebook.wss",db-15,1.0};titles[] = {};};
 	class d_Ui_cc {name="d_Ui_cc";sound[]={"\sounds\ui_cc.wss",db,1.0};titles[] = {};};
 	class d_fanfare {name = "d_fanfare";sound[] = {"sounds\fanfare.wss",1.0,1.0};titles[] = {};};
 	class d_war {name = "d_war";sound[] = {"sounds\aawar.ogg",db+10,1.0};titles[] = {};};
-	class d_rankup {name = "d_rankup";sound[] = {"sounds\rankup.ogg",db,1.0};titles[] = {};};
-	class nice_shot_01 {name = "nice_shot_01";sound[] = {"sounds\nice_shot_01.ogg",db,1.0};titles[] = {};};
-	class letsgo {name = "letsgo";sound[] = {"sounds\letsgo.ogg",db,1.0};titles[] = {};};
-	class sector_clier {name = "sector_clier";sound[] = {"sounds\sector_clier.ogg",db,1.0};titles[] = {};};
-	class noob {name = "noob";sound[] = {"sounds\noob.ogg",db,1.0};titles[] = {};};
-	class Arty_1 {name = "Arty_1";sound[] = {"sounds\Arty_1.ogg",db,1.0};titles[] = {};};
-	class Arty_2 {name = "Arty_2";sound[] = {"sounds\Arty_2.ogg",db,1.0};titles[] = {};};
-	class Document {name = "Document";sound[] = {"sounds\Document.ogg",db,1.0};titles[] = {};};
-	class LohBratela {name = "LohBratela";sound[] = {"sounds\LohBratela.ogg",db,1.0};titles[] = {};};
-	class baklan {name = "baklan";sound[] = {"sounds\baklan.ogg",db,1.0};titles[] = {};};
-	class tvoymam {name = "tvoymam";sound[] = {"sounds\tvoymam.ogg",db,1.0};titles[] = {};};
-	class RealPatcan {name = "RealPatcan";sound[] = {"sounds\RealPatcan.ogg",db,1.0};titles[] = {};};
-	class Ebtvoy {name = "Ebtvoy";sound[] = {"sounds\Ebtvoy.ogg",db,1.0};titles[] = {};};
-	class Svoloch {name = "Svoloch";sound[] = {"sounds\Svoloch.ogg",db,1.0};titles[] = {};};
-	class poneslas {name = "poneslas";sound[] = {"sounds\poneslas.ogg",db,1.0};titles[] = {};};
-	class OlenChemit {name = "OlenChemit";sound[] = {"sounds\OlenChemit.ogg",db,1.0};titles[] = {};};
-	class VilazPadla {name = "VilazPadla";sound[] = {"sounds\VilazPadla.ogg",db,1.0};titles[] = {};};
-	class ChaSbacau {name = "ChaSbacau";sound[] = {"sounds\ChaSbacau.ogg",db,1.0};titles[] = {};};
-	class kozlina {name = "kozlina";sound[] = {"sounds\kozlina.ogg",db,1.0};titles[] = {};};
-	class kill_civ {name = "kill_civ";sound[] = {"sounds\kill_civ.ogg",db,1.0};titles[] = {};};
-	class gadina {name = "gadina";sound[] = {"sounds\gadina.ogg",db,1.0};titles[] = {};};
-	class herachpatcany {name = "herachpatcany";sound[] = {"sounds\herachpatcany.ogg",db,1.0};titles[] = {};};
-	class sbrosbomb {name = "sbrosbomb";sound[] = {"sounds\sbrosbomb.ogg",db,1.0};titles[] = {};};
-	class airstrike {name = "airstrike";sound[] = {"sounds\airstrike.ogg",db,1.0};titles[] = {};};
-	class artudar {name = "artudar";sound[] = {"sounds\artudar.ogg",db,1.0};titles[] = {};};
-	class webmoney {name = "webmoney";sound[] = {"sounds\webmoney.ogg",db,1.0};titles[] = {};};
+	class d_rankup {name = "d_rankup";sound[] = {"\sounds\rankup.ogg",db,1.0};titles[] = {};};
+	class nice_shot_01 {name = "nice_shot_01";sound[] = {"\sounds\nice_shot_01.ogg",db,1.0};titles[] = {};};
+	class letsgo {name = "letsgo";sound[] = {"\sounds\letsgo.ogg",db,1.0};titles[] = {};};
+	class sector_clier {name = "sector_clier";sound[] = {"\sounds\sector_clier.ogg",db,1.0};titles[] = {};};
+	class noob {name = "noob";sound[] = {"\sounds\noob.ogg",db,1.0};titles[] = {};};
+	class Arty_1 {name = "Arty_1";sound[] = {"\sounds\Arty_1.ogg",db,1.0};titles[] = {};};
+	class Arty_2 {name = "Arty_2";sound[] = {"\sounds\Arty_2.ogg",db,1.0};titles[] = {};};
+	class Document {name = "Document";sound[] = {"\sounds\Document.ogg",db,1.0};titles[] = {};};
+	class LohBratela {name = "LohBratela";sound[] = {"\sounds\LohBratela.ogg",db,1.0};titles[] = {};};
+	class baklan {name = "baklan";sound[] = {"\sounds\baklan.ogg",db,1.0};titles[] = {};};
+	class tvoymam {name = "tvoymam";sound[] = {"\sounds\tvoymam.ogg",db,1.0};titles[] = {};};
+	class RealPatcan {name = "RealPatcan";sound[] = {"\sounds\RealPatcan.ogg",db,1.0};titles[] = {};};
+	class Ebtvoy {name = "Ebtvoy";sound[] = {"\sounds\Ebtvoy.ogg",db,1.0};titles[] = {};};
+	class Svoloch {name = "Svoloch";sound[] = {"\sounds\Svoloch.ogg",db,1.0};titles[] = {};};
+	class poneslas {name = "poneslas";sound[] = {"\sounds\poneslas.ogg",db,1.0};titles[] = {};};
+	class OlenChemit {name = "OlenChemit";sound[] = {"\sounds\OlenChemit.ogg",db,1.0};titles[] = {};};
+	class VilazPadla {name = "VilazPadla";sound[] = {"\sounds\VilazPadla.ogg",db,1.0};titles[] = {};};
+	class ChaSbacau {name = "ChaSbacau";sound[] = {"\sounds\ChaSbacau.ogg",db,1.0};titles[] = {};};
+	class kozlina {name = "kozlina";sound[] = {"\sounds\kozlina.ogg",db,1.0};titles[] = {};};
+	class kill_civ {name = "kill_civ";sound[] = {"\sounds\kill_civ.ogg",db,1.0};titles[] = {};};
+	class gadina {name = "gadina";sound[] = {"\sounds\gadina.ogg",db,1.0};titles[] = {};};
+	class herachpatcany {name = "herachpatcany";sound[] = {"\sounds\herachpatcany.ogg",db,1.0};titles[] = {};};
+	class sbrosbomb {name = "sbrosbomb";sound[] = {"\sounds\sbrosbomb.ogg",db,1.0};titles[] = {};};
+	class airstrike {name = "airstrike";sound[] = {"\sounds\airstrike.ogg",db,1.0};titles[] = {};};
+	class artudar {name = "artudar";sound[] = {"\sounds\artudar.ogg",db,1.0};titles[] = {};};
+	class webmoney {name = "webmoney";sound[] = {"\sounds\webmoney.ogg",db,1.0};titles[] = {};};
 	//class AR_Rappel_Loop {name = "AR_Rappel_Loop"; sound[] = {"sounds\AR_Rappel_Loop.ogg", db+20, 1}; titles[] = {0,""};};
 	//class AR_Rappel_Start {name = "AR_Rappel_Start"; sound[] = {"sounds\AR_Rappel_Start.ogg", db+20, 1};titles[] = {0,""};};
 	//class AR_Rappel_End {name = "AR_Rappel_End"; sound[] = {"sounds\AR_Rappel_End.ogg", db+20, 1}; titles[] = {0,""};};
@@ -2552,6 +2624,16 @@ class d_RscAnimatedLetters {
 		class L208: L1 {idc = __EVAL(idc + 207);};
 		class L209: L1 {idc = __EVAL(idc + 208);};
 	};
+};
+
+class RscActiveText; // Объявляем базовый класс
+
+class RscActivePicture: RscActiveText {
+    style = ST_PICTURE;
+    color[] = {1,1,1,1};
+    colorActive[] = {1,1,1,1};
+    colorDisabled[] = {1,1,1,0.5};
+    sizeEx = 0.04;
 };
 
 class RscTitles {
@@ -3110,13 +3192,14 @@ class Extended_Init_Eventhandlers {
 	class CfgFonts {
     class RobotoCondensed {
         font = "\A3\Ui_fonts\F_RobotoCondensed\RobotoCondensed";
-        size = 1;
     };
     class RobotoCondensedBold {
         font = "\A3\Ui_fonts\F_RobotoCondensed\RobotoCondensedBold";
-        size = 1;
     };
-};
+    class LucidaConsoleB {
+        font = "\a3\fonts_f\patches\LucidaConsoleB.otf";
+    };
+  };
 };
 
 //__EXEC(diag_log [diag_frameno, diag_ticktime, time, "Dom description.ext processed"]);

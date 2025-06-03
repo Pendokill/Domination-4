@@ -10,8 +10,8 @@ if (productVersion # 2 < 218) exitWith {
 };
 
 // Чтобы включить мод спавна техники на вашем сервере, но также получать уведомление, когда пользователи используют его (режим читера)
-// DCON_Garage_Enabled = 0;
-// publicVariable "DCON_Garage_Enabled";
+DCON_Garage_Enabled = 0;
+publicVariable "DCON_Garage_Enabled";
 
 if (isMultiplayer && {hasInterface}) then {
 	enableRadio true;
@@ -27,7 +27,37 @@ enableTeamSwitch false;
 // Серверная инициализация магазина
 if (isServer) then {
     [] execVM "scripts\vehicleShop\vehicleShop_config.sqf";
+    waitUntil {!isNil "vehicleShop_configLoaded"};
+    
+	if (isNil "vehicleShop_vehicles") then {
+        vehicleShop_vehicles = [];
+        publicVariable "vehicleShop_vehicles";
+    };
+	
+    if (isNil "vehicleShop_loadMode") then {
+        vehicleShop_loadMode = 0;
+        publicVariable "vehicleShop_loadMode";
+    };
+    
     [] execVM "scripts\vehicleShop\vehicleShop_init.sqf";
+    
+    // Создание маркера если не существует
+    if (getMarkerColor "vehicle_spawn" == "") then {
+        createMarker ["vehicle_spawn", [577.138,12284.1]];
+        "vehicle_spawn" setMarkerDir 0;
+        "vehicle_spawn" setMarkerType "hd_start";
+        "vehicle_spawn" setMarkerColor "ColorGreen";
+        publicVariable "vehicle_spawn";
+    };
+};
+
+if (hasInterface) then {
+    player addEventHandler ["Respawn", {
+        [] spawn {
+            waitUntil {!isNull (findDisplay 5000)};
+            ['All'] call vehicleShop_filterByCategory;
+        };
+    }];
 };
 
 // Клиентская инициализация
@@ -36,6 +66,13 @@ if (hasInterface) then {
         waitUntil {!isNull player && !isNil "vehicleShop_configLoaded"};
         systemChat "Магазин техники готов к использованию";
     };
+};
+
+// Банковская система (после инициализации CBA и extDB3)
+[] spawn {
+    waitUntil {time > 5};
+    [] execVM "scripts\bank\bank_init.sqf";
+    diag_log "[Init] Банковская система запущена";
 };
 
 player exec "scripts\radioru.sqs";

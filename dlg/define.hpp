@@ -11,18 +11,23 @@
 #define CT_STATIC_SKEW		10
 #define CT_ACTIVETEXT		11
 #define CT_TREE				12
-#define CT_STRUCTURED_TEXT	13 
+#define CT_STRUCTURED_TEXT	13
+#define CT_CONTROLS_GROUP	15
+#define CT_SHORTCUTBUTTON	16 
 #define CT_3DSTATIC			20
 #define CT_3DACTIVETEXT		21
 #define CT_3DLISTBOX		22
 #define CT_3DHTML			23
 #define CT_3DSLIDER			24
 #define CT_3DEDIT			25
+#define CT_XSLIDER			43
 #define CT_OBJECT			80
 #define CT_OBJECT_ZOOM		81
 #define CT_OBJECT_CONTAINER	82
 #define CT_OBJECT_CONT_ANIM	83
 #define CT_USER				99
+#define CT_MAP				101
+#define CT_LISTNBOX			102
 #define ST_HPOS				0x0F
 #define ST_LEFT				0
 #define ST_RIGHT			1
@@ -47,6 +52,8 @@
 #define ST_NO_RECT			512
 #define ST_KEEP_ASPECT_RATIO  0x800
 #define ST_TITLE			ST_TITLE_BAR + ST_CENTER
+#define ST_TEXT_BG 				128
+#define LB_MULTI 				0x20
 #define FontHTML			"RobotoCondensed"
 #define FontM				"RobotoCondensed"
 #define Dlg_ROWS			36
@@ -286,6 +293,43 @@ class xr_mouseHandler : RscControlsGroup {
 	colorBackground[] = {0, 0, 0, 0};
 };
 
+class IGUIBack {
+	type = CT_STATIC;
+	idc = 124;
+	style = 128;
+	text = "";
+	colorText[] = {0, 0, 0, 0};
+	font = "PuristaMedium";
+	sizeEx = 0.0;
+	x = 0.1;
+	y = 0.1;
+	w = 0.1;
+	h = 0.1;
+	colorbackground[] = {0.1882, 0.2588, 0.149, 0.76};
+};
+
+//--- Active / Clickable text
+class RscActiveText {
+	type = CT_ACTIVETEXT;
+	idc = -1;
+	style = ST_CENTER;
+	x = 0;
+	y = 0;
+	h = 0.035;
+	w = 0.035;
+	font = "PuristaMedium";
+	shadow = 2;
+	text = "";
+	sizeEx = "(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
+	color[] = {0,0,0,1};
+	colorText[] = {0,0,0,1};
+	colorActive[] = {0.3,0.4,0,1};
+	soundEnter[] = {"\A3\ui_f\data\sound\RscButtonMenu\soundEnter",0.09,1};
+	soundPush[] = {"\A3\ui_f\data\sound\RscButtonMenu\soundPush",0.09,1};
+	soundClick[] = {"\A3\ui_f\data\sound\RscButtonMenu\soundClick",0.09,1};
+	soundEscape[] = {"\A3\ui_f\data\sound\RscButtonMenu\soundEscape",0.09,1};
+};
+
 #define __DDIALOG_BG(loc_str) \
 	class BackGroundCaption: RscText { \
 		x = 0; y = 0; \
@@ -491,4 +535,158 @@ class d_RscStructuredText: RscStructuredText {
 	text = "";
 	size = 0.03921;
 	shadow = 2;
+};
+
+class RscControlsGroup {
+	type = CT_CONTROLS_GROUP;
+	idc = -1;
+	x = 0;
+	y = 0;
+	w = 1;
+	h = 1;
+	shadow = 0;
+	style = ST_MULTI;
+	class VScrollbar {
+		width = 0.021;
+		autoScrollSpeed = -1;
+		autoScrollDelay = 5;
+		autoScrollRewind = 0;
+		shadow = 0;
+		color[] = {1,1,1,0.6};
+	};
+	class HScrollbar {
+		height = 0.028;
+		shadow = 0;
+		color[] = {1,1,1,0.6};
+	};
+	class ListScrollBar	{
+		color[] = {1,1,1,0.6};
+		colorActive[] = {1,1,1,1};
+		colorDisabled[] = {1,1,1,0.3};
+		thumb = "\A3\ui_f\data\gui\cfg\scrollbar\thumb_ca.paa";
+		arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa";
+		arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa";
+		border = "\A3\ui_f\data\gui\cfg\scrollbar\border_ca.paa";
+	};
+	class Controls{};
+};
+
+//--- Button - Shortcut
+class RscShortcutButton {
+	type = CT_SHORTCUTBUTTON;
+	idc = -1;
+	style = ST_LEFT;
+	default = 0;
+	shadow = 1;
+	w = 0.183825;
+	h = "(		(		((safezoneW / safezoneH) min 1.2) / 1.2) / 20)";
+	color[] = {1,1,1,1.0};
+	color2[] = {0.95,0.95,0.95,1};
+	colorDisabled[] = {1,1,1,0.25};
+	colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])","(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])","(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])",1};
+	colorBackground2[] = {1,1,1,1};
+	animTextureDefault = "\A3\ui_f\data\GUI\RscCommon\RscShortcutButton\normal_ca.paa";
+	animTextureNormal = "\A3\ui_f\data\GUI\RscCommon\RscShortcutButton\normal_ca.paa";
+	animTextureDisabled = "\A3\ui_f\data\GUI\RscCommon\RscShortcutButton\normal_ca.paa";
+	animTextureOver = "\A3\ui_f\data\GUI\RscCommon\RscShortcutButton\over_ca.paa";
+	animTextureFocused = "\A3\ui_f\data\GUI\RscCommon\RscShortcutButton\focus_ca.paa";
+	animTexturePressed = "\A3\ui_f\data\GUI\RscCommon\RscShortcutButton\down_ca.paa";
+	periodFocus = 1.2;
+	periodOver = 0.8;
+	class HitZone {
+		left = 0.0;
+		top = 0.0;
+		right = 0.0;
+		bottom = 0.0;
+	};
+	class ShortcutPos {
+		left = 0;
+		top = "(			(		(		((safezoneW / safezoneH) min 1.2) / 1.2) / 20) - 		(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)) / 2";
+		w = "(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1) * (3/4)";
+		h = "(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
+	};
+	class TextPos {
+		left = "(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1) * (3/4)";
+		top = "(			(		(		((safezoneW / safezoneH) min 1.2) / 1.2) / 20) - 		(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)) / 2";
+		right = 0.005;
+		bottom = 0.0;
+	};
+	period = 0.4;
+	font = "RobotoCondensed";
+	size = "(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
+	sizeEx = "(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
+	text = "";
+	soundEnter[] = {"\A3\ui_f\data\sound\RscButtonMenu\soundEnter",0.09,1};
+	soundPush[] = {"\A3\ui_f\data\sound\RscButtonMenu\soundPush",0.09,1};
+	soundClick[] = {"\A3\ui_f\data\sound\RscButtonMenu\soundClick",0.09,1};
+	soundEscape[] = {"\A3\ui_f\data\sound\RscButtonMenu\soundEscape",0.09,1};
+	action = "";
+	class Attributes {
+		font = "RobotoCondensed";
+		color = "#E5E5E5";
+		align = "left";
+		shadow = "true";
+	};
+	class AttributesImage {
+		font = "RobotoCondensed";
+		color = "#E5E5E5";
+		align = "left";
+	};
+};
+
+class RscXSliderH {
+	type = CT_XSLIDER;
+	style = "0x400	+ 0x10";
+	shadow = 0;
+	x = 0;
+	y = 0;
+	h = 0.029412;
+	w = 0.4;
+	color[] = {1,1,1,0.6};
+	colorActive[] = {1,1,1,1};
+	colorDisabled[] = {1,1,1,0.2};
+	arrowEmpty = "\A3\ui_f\data\gui\cfg\slider\arrowEmpty_ca.paa";
+	arrowFull = "\A3\ui_f\data\gui\cfg\slider\arrowFull_ca.paa";
+	border = "\A3\ui_f\data\gui\cfg\slider\border_ca.paa";
+	thumb = "\A3\ui_f\data\gui\cfg\slider\thumb_ca.paa";
+};
+
+//--- Listnbox
+class RscListNBox {
+	type = CT_LISTNBOX;
+	style = ST_MULTI;
+	shadow = 0;
+	font = "RobotoCondensed";
+	sizeEx = "(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
+	color[] = {0.95,0.95,0.95,1};
+	colorText[] = {1,1,1,1.0};
+	colorDisabled[] = {1,1,1,0.25};
+	colorScrollbar[] = {0.95,0.95,0.95,1};
+	colorSelect[] = {0,0,0,1};
+	colorSelect2[] = {0,0,0,1};
+	colorSelectBackground[] = {0.95,0.95,0.95,1};
+	colorSelectBackground2[] = {1,1,1,0.5};
+
+        colorPicture[] = {1, 1, 1, 1};   // Белый цвет (R,G,B,Alpha)
+        colorPictureSelected[] = {1, 1, 1, 1};
+        colorPictureDisabled[] = {1, 1, 1, 1};
+
+	period = 1.2;
+	soundSelect[] = {"\A3\ui_f\data\sound\RscListbox\soundSelect",0.09,1};
+	autoScrollSpeed = -1;
+	autoScrollDelay = 5;
+	autoScrollRewind = 0;
+	maxHistoryDelay = 1.0;
+	idcRight = -1;
+	idcLeft = -1;
+	drawSideArrows = 0;
+	class ListScrollBar {
+		color[] = {1,1,1,0.6};
+		colorActive[] = {1,1,1,1};
+		colorDisabled[] = {1,1,1,0.3};
+		thumb = "\A3\ui_f\data\gui\cfg\scrollbar\thumb_ca.paa";
+		arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa";
+		arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa";
+		border = "\A3\ui_f\data\gui\cfg\scrollbar\border_ca.paa";
+	};
 };

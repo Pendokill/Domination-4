@@ -351,7 +351,7 @@ if (hasInterface) then {
 			2000, // Sergeant
 			5000, // Lieutenant
 			9000, // Captain
-			14000, // Major
+			15000, // Major
 			30000, // Colonel
 			50000 // General
 		];
@@ -375,7 +375,7 @@ if (hasInterface) then {
 			2000, // Sergeant
 			5000, // Lieutenant
 			9000, // Captain
-			14000, // Major
+			15000, // Major
 			30000, // Colonel
 			50000 // General
 		];

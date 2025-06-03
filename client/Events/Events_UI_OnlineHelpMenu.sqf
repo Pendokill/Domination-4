@@ -3,7 +3,7 @@ _action = _this select 0;
 
 switch (_action) do {
 	case "onLoad": {
-		{((uiNamespace getVariable "cti_dialog_ui_onlinehelpmenu") displayCtrl 160001) lbAdd _x} forEach [localize "$STR_Intro_01", localize "$STR_Intro_02", localize "$STR_Intro_03", localize "$STR_Intro_04", localize "$STR_Intro_05", localize "$STR_Intro_06", localize "$STR_Intro_10"];
+		{((uiNamespace getVariable "cti_dialog_ui_onlinehelpmenu") displayCtrl 160001) lbAdd _x} forEach [localize "$STR_Intro_01", localize "$STR_Intro_02", localize "$STR_Intro_03", localize "$STR_Intro_04", localize "$STR_Intro_07", localize "$STR_Intro_05", localize "$STR_Intro_06", localize "$STR_Intro_10"];
 		((uiNamespace getVariable "cti_dialog_ui_onlinehelpmenu") displayCtrl 160001) lbSetCurSel 0;
 	};
 	case "onHelpLBSelChanged": {
@@ -69,12 +69,46 @@ _helps = [
 В Доминации можно нанимать в свою команду бойцов (<t color='#e54934'>зависит от режима игры</t>), каждый юнит выполняет свою функцию! <br />
 <t color='#33ffba'>Например...</t> <br />
 <t color='#e8bd12'>Медик</t> - всегда поднимет вас, юнита и других игроков на сервере! Начинает действовать после того, как раненный попросит помощи.<br />
-<t color='#e8bd12'>Лётчик или Вертолётчик</t> - лучше определяет цели. Для стрельбы наводящими ракетами, вам нужно указать цель и самому нажать ЛКМ.<br />
-<t color='#e8bd12'>Экипаж бронетехники</t> - лучше определяет цели. Для стрельбы наводящими ракетами, вам нужно указать цель и самому нажать ЛКМ. Стрелку сами переключаем орудие, ракеты или пулемёт через <t color='#e54934'>F</t>. Если вы покинули машину, юниты сами переключают оружие и работают по целям.<br />
+<t color='#e8bd12'>Лётчик или Вертолётчик</t> - лучше определяет цели, сами переключают между орудием и ракетами, определяя цели и чем по ним работать.<br />
+<t color='#e8bd12'>Экипаж бронетехники</t> - лучше определяет цели, сами переключают между орудием и пулемётом, определяя по какой цели работать. Если танк подбили - экипаж самостоятельно чинит технику, садится обратно и продолжает бой.<br />
 <t color='#e8bd12'>Инженер</t> - переворачивает-ремонтирует технику и авиацию, минирует-разминирует.<br />
-<t color='#e8bd12'>Спецназ</t> или <t color='#e8bd12'>Разведчик</t> - для штурма или ближнего боя вам не найти бойцов лучше, чем эти ребята.<br />
+<t color='#e8bd12'>Спецназ</t> или <t color='#e8bd12'>Разведчик</t> - для штурма или ближнего боя вам не найти бойцов лучше, чем эти ребята. Самостоятельно определяют технику врага и подрывают, при этом не идут сломя в бой, а скрытно подходят и где нужно дойти до цели - маскируются или прячутся в укрытия, не ведут стрельбу по противнику, что бы себя не обнаружить.<br />
 Всегда выбирайте нужных бойцов для выполнения определённых задач!<br /><br />
 Учимся управлять юнитами: <a underline='true' color='#00ff4c' href='https://zonats.ru/topic/5363-upravlenie-botami-v-arma-3/'>форум</a><br /><br />
+",
+"<t size='1.4' color='#2394ef'>Магазин и система кредитов</t><br /><br />
+<br /><br />
+<t color='#e8bd12' size='1.5'>МАГАЗИН ТЕХНИКИ</t><br />
+<t align='center'><img image='\a3\ui_f\data\igui\cfg\simpletasks\types\repair_ca.paa' size='1.5'/></t><br />
+<t color='#33ffba'>Основные функции:</t><br />
+- Покупка доступна только в <t color='#f455aa'>специальных зонах</t> (отмечены иконкой <img image='\a3\ui_f\data\map\markers\nato\c_car.paa' size='1.5'/> на карте)<br />
+- Для покупки выберите технику в меню и нажмите <t color='#f455aa'>Купить</t> (требуемое количество Очков спишется автоматически)<br />
+- <t color='#eaff96'>Возврат техники:</t> Подвезите технику к зоне <t color='#251da2'>Спавна техники</t> после покупки в радиусе 30м. и используйте действие <t color='#f455aa'>Вернуть</t> в меню взаимодействия (возвращается <t color='#f455aa'>50%</t> стоимости)<br />
+- <t color='#ff9999'>Блокировка:</t> При покидании зоны магазина без покупки техника автоматически блокируется на <t color='#ff9999'>2 минуты</t><br />
+- <t color='#ff9999'>Ремонт:</t> После полного уничтожения и ремонта, ваша техника становится <t color='#ff9999'>доступна каждому</t> игроку.<br /><br />
+
+<t color='#e8bd12' size='1.5'>БАНКОВСКАЯ СИСТЕМА</t><br />
+<t align='center'><img image='\a3\ui_f\data\gui\Rsc\RscDisplayMain\profile_player_ca.paa' size='1.5'/></t><br />
+- Банк доступен в <t color='#f455aa'>специальных зонах</t> (отмечены иконкой <img image='\a3\ui_f\data\map\LocationTypes\borderCrossing_CA.paa' size='1.3'/> на карте)<br />
+<t color='#33ffba'>Кредитный механизм:</t><br />
+- Максимальная сумма: <t color='#f455aa'>5000 Очков</t><br />
+- Процентная ставка: <t color='#f455aa'>от 5% - до 50%</t> от суммы кредита<br />
+- Автопогашение: <t color='#eaff96'>50%</t> от всех поступающих Очков идут на погашение долга<br />
+- Коллекторы: <t color='#f455aa'>Банк</t> работает с внешней Базой данных! Даже если взять и придти через год - Банк помнит ваши долги, только уже для вас в огромном минусе, тюрьмой и баном.<br /><br />
+
+<t color='#ff9999'>Санкции за просрочку:</t><br />
+1. <t color='#ff9999'>+5% штрафа</t> к общей сумме долга каждые 60 минут<br />
+2. Блокировка покупок в магазине при просрочке <t color='#ff9999'>>15 минут</t><br />
+3. При <t color='#ff0000'>30+ минутах</t> просрочки:<br />
+   - Конфискация <t color='#ff0000'>всей купленной техники</t><br />
+   - Блокировка кредита на <t color='#ff0000'>1 час</t><br /><br />
+
+<t align='center'><img image='\a3\ui_f\data\gui\Rsc\RscDisplaySingleMission\warning_ca.paa' size='1.5'/> <t color='#ff0000'>ВНИМАНИЕ!</t> <t color='#eaff96'>Система автоматически применяет санкции без возможности отмены!</t></t><br /><br />
+
+<t color='#33ffba'>Дополнительно:</t><br />
+- Текущий долг отображается в <t color='#f455aa'>специальном виджете</t> на экране<br />
+- История операций доступна в меню статистики<br />
+- При <t color='#eaff96'>досрочном погашении</t> (полная сумма) штрафы не применяются<br /><br />
 ",
 "<t size='1.4' color='#2394ef'>Рекомендуемые моды</t><br /><br />
  <t align='center'><img image='A3\data_f\SteamPublisher\All\Arma3_workshop_addon.jpg' size='9'/></t><br /><br />
@@ -101,6 +135,7 @@ _helps = [
 	6) <t color='#e54934'>ЗАПРЕЩЕНО</t>: <t color='#e8bd12'>использование модов и паков техники, авиации, амуниции и оружия - кроме рекомендуемых</t>!!! <t color='#e54934'>БАН</t> незамедлительно!<br/><br/> 
 	Сайт: <a underline='true' color='#00ff4c' href='https://zonats.ru'>Посетить</a><br/>
 	Миссия Доминация: <a underline='true' color='#00ff4c' href='https://zonats.ru/topic/5243-missija-dominacija-malden-stratis-altis/'>Обсудить</a><br/>
+	Обнулился счёт (потеря очей): <a underline='true' color='#00ff4c' href='https://zonats.ru/topic/8282-obnulilsja-moj-schyot-ochkov-na-servere/'>Техподдержка</a><br/>
 	Улучшить ФПС: <a underline='true' color='#00ff4c' href='https://zonats.ru/topic/5448-nastrojka-i-optimizacija-arma-3/'>Мне нужно!</a><br/>
 	Группа ВК: <a underline='true' color='#00ff4c' href='https://vk.com/club10671900'>Зайти</a><br/>
 	Рекомендуемые моды: <a underline='true' color='#00ff4c' href='https://steamcommunity.com/sharedfiles/filedetails/?id=2713618821'>Подписаться</a><br/>

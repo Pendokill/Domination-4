@@ -1779,7 +1779,7 @@
 <Korean>잔해수송 헬기</Korean>
 <Japanese>残骸輸送ヘリコプター</Japanese>
 <English>Wreck Lift Chopper</English>
-<Russian>Поднять разбитый вертолёт</Russian>
+<Russian>Вертолёт транспортировки разбитой техники</Russian>
 <Chinesesimp>残骸吊运直升机</Chinesesimp>
 <Chinese>殘骸吊運直升機</Chinese>
 <French>Hélicoptère d'enlevement d'épaves</French>
@@ -1796,7 +1796,7 @@
 <Korean>장비수송 헬기</Korean>
 <Japanese>空輸ヘリコプター</Japanese>
 <English>Lift Chopper</English>
-<Russian>Грузовой вертолёт</Russian>
+<Russian>Вертолёт транспортировки техники</Russian>
 <Chinesesimp>吊运直升机</Chinesesimp>
 <Chinese>吊运直升机</Chinese>
 <French>Hélicoptèro de Transport</French>
@@ -2242,7 +2242,7 @@
 <Korean>장난이시죠?</Korean>
 <Japanese>冗談でしょう...</Japanese>
 <English>You must be kidding...</English>
-<Russian>Вы должны наиграть очей!</Russian>
+<Russian>Вам надо наиграть очей!</Russian>
 <Chinesesimp>你一定是在开玩笑...</Chinesesimp>
 <Chinese>你一定是在開玩笑...</Chinese>
 <French>Vous devez plaisanter...</French>
@@ -13031,7 +13031,7 @@
 <Korean>모든 미션에서 보상장비가 없습니다</Korean>
 <Japanese>ボーナス車両無し</Japanese>
 <English>No bonus vehicles at all</English>
-<Russian>Нет бонус техники</Russian>
+<Russian>Без бонус техники вообще!</Russian>
 <Chinesesimp>没有奖励载具</Chinesesimp>
 <Chinese>沒有獎勵載具</Chinese>
 <French>Pas de véhicules bonus du tout</French>
@@ -19090,21 +19090,21 @@
 <Italian>Очки и Звания</Italian>
 </Key>
 <Key ID="STR_Intro_07">
-<Original>Instruction manual</Original>
-<German>Инструкция</German>
-<Spanish>Инструкция</Spanish>
-<Portuguese>Инструкция</Portuguese>
-<Korean>Инструкция</Korean>
-<Japanese>Инструкция</Japanese>
-<English>Instruction manual</English>
-<Russian>Инструкция</Russian>
-<Chinesesimp>Инструкция</Chinesesimp>
-<Chinese>Инструкция</Chinese>
-<French>Инструкция</French>
-<Turkish>Инструкция</Turkish>
-<Czech>Инструкция</Czech>
-<Hungarian>Инструкция</Hungarian>
-<Italian>Инструкция</Italian>
+<Original>Bank and Store</Original>
+<German>Банк и Магазин</German>
+<Spanish>Банк и Магазин</Spanish>
+<Portuguese>Банк и Магазин</Portuguese>
+<Korean>Банк и Магазин</Korean>
+<Japanese>Банк и Магазин</Japanese>
+<English>Банк и Магазин</English>
+<Russian>Банк и Магазин</Russian>
+<Chinesesimp>Банк и Магазин</Chinesesimp>
+<Chinese>Банк и Магазин</Chinese>
+<French>Банк и Магазин</French>
+<Turkish>Банк и Магазин</Turkish>
+<Czech>Банк и Магазин</Czech>
+<Hungarian>Банк и Магазин</Hungarian>
+<Italian>Банк и Магазин</Italian>
 </Key>
 <Key ID="STR_Intro_08">
 <Original>Instruction manual</Original>

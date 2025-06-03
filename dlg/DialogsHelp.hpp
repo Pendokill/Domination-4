@@ -3,8 +3,8 @@
 class CTI_RscOnlineHelpMenu {
 	movingEnable = 0;
 	idd = 160000;
-	onLoad = "uiNamespace setVariable ['cti_dialog_ui_onlinehelpmenu', _this select 0];['onLoad'] execVM 'Client\Events\Events_UI_OnlineHelpMenu.sqf'";
-	onUnload = "uiNamespace setVariable ['cti_dialog_ui_onlinehelpmenu', nil]; ['onUnload'] call compile preprocessFileLineNumbers 'Client\Events\Events_UI_OnlineHelpMenu.sqf'";
+	onLoad = "uiNamespace setVariable ['cti_dialog_ui_onlinehelpmenu', _this select 0];['onLoad'] execVM 'client\Events\Events_UI_OnlineHelpMenu.sqf'";
+	onUnload = "uiNamespace setVariable ['cti_dialog_ui_onlinehelpmenu', nil]; ['onUnload'] call compile preprocessFileLineNumbers 'client\Events\Events_UI_OnlineHelpMenu.sqf'";
 
 	class controlsBackground {
 		class CTI_Background : RscText {
